@@ -1,0 +1,28 @@
+<h1>Проекты</h1>
+
+<% if @projects.any? %>
+  <% @projects.each do |project| %>
+    <div>
+      <h2><%= project.title %></h2>
+      
+      <% if project.image.present? %>
+        <%= image_tag project.image.url, width: 600 %>
+      <% end %>
+      
+      <p><strong>Описание:</strong> <%= project.description %></p>
+      <p><strong>Категория:</strong> <%= project.category %></p>
+      <p><strong>Автор:</strong> <%= project.user.username %></p>
+      
+
+      <h3>Фидбеки (<%= project.feedbacks.count %>):</h3>
+      <% project.feedbacks.each do |feedback| %>
+        <div>
+          <p><strong><%= feedback.user.username %>:</strong> <%= feedback.content %></p>
+          <p>Категория: <%= feedback.category %> | Полезный: <%= feedback.is_helpful ? '✅ Да' : '❌ Нет' %></p>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+<% else %>
+ 
+<% end %>

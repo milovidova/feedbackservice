@@ -23,6 +23,12 @@
   </head>
 
   <body>
+  <nav>
+  <%= link_to "Проекты", root_path %> | 
+  <%= link_to "О нас", about_path %> | 
+  <%= link_to "Профиль", profile_path %> | 
+  <%= link_to "Статьи", articles_path %>
+</nav>
     <%= yield %>
   </body>
 </html>
