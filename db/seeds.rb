@@ -6,7 +6,7 @@
 @words = @raw_text.downcase.gsub(/[—.—,«»:()]/, '').gsub(/  /, ' ').split(' ')
 
 
-PROJECT_CATEGORIES = ['UI/UX Design', 'Graphic Design', 'Product Design', 'Web Design', 'Mobile Design', 'Brand Identity']
+PROJECT_CATEGORIES = ['UI/UX дизайн', 'Графический дизайн', 'Продуктовый дизайн', 'Веб дизайн', 'Мобильный дизайн', 'Брендинг']
 PROJECT_TITLES = [
   "Мобильное приложение для банкинга",
   "Дизайн сайта для кофейни",
@@ -34,7 +34,7 @@ PROJECT_TITLES = [
   "Интерфейс для стриминга",
   "Редизайн корпоративного сайта"
 ]
-FEEDBACK_CATEGORIES = ['Typography', 'Color Scheme', 'Usability', 'Composition', 'Concept']
+FEEDBACK_CATEGORIES = ['Типографика', 'Цвета', 'Юзабилити', 'Композиция', 'Концепция']
 
 def seed
   reset_db

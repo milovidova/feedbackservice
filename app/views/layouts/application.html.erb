@@ -25,9 +25,12 @@
   <body>
   <nav>
   <%= link_to "Проекты", root_path %> | 
-  <%= link_to "О нас", about_path %> | 
-  <%= link_to "Профиль", profile_path %> | 
-  <%= link_to "Статьи", articles_path %>
+ 
+
+  <%= link_to "О нас", pages_about_path %> |
+  <%= link_to "Профиль", pages_profile_path %> | 
+  <%= link_to "Статьи", pages_articles_path %>
+  <%= link_to "Создать проект", new_project_path %> 
 </nav>
     <%= yield %>
   </body>

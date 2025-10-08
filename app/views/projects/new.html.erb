@@ -1,0 +1,32 @@
+<h1>Создать проект</h1>
+
+<%= form_with model: @project, local: true do |form| %>
+  <div>
+    <%= form.label :title, "Название проекта" %>
+    <%= form.text_field :title, size: 50 %>
+  </div>
+
+  <div>
+    <%= form.label :description, "Описание" %>
+    <%= form.text_area :description, rows: 4, cols: 50 %>
+  </div>
+
+  <div>
+    <%= form.label :category, "Категория" %>
+    <%= form.select :category, ['UI/UX дизайн', 'Графический дизайн', 'Продуктовый дизайн', 'Веб дизайн', 'Мобильный дизайн', 'Брендинг'] %>
+  </div>
+
+  <div>
+    <%= form.label :feedback_request, "Запрос фидбека" %>
+    <%= form.text_area :feedback_request, rows: 3, cols: 50, placeholder: "На что хочешь получить фидбек?" %>
+  </div>
+
+  <div>
+    <%= form.label :image, "Картинка проекта" %>
+    <%= form.file_field :image %>
+  </div>
+
+  <%= form.submit "Создать проект" %>
+<% end %>
+
+<%= link_to "Назад к проектам", projects_path %>
