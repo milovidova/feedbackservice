@@ -23,15 +23,18 @@
   </head>
 
   <body>
-  <nav>
-  <%= link_to "Проекты", root_path %> | 
- 
+  <div class="menu">
+<%= image_tag "vectoreye.svg", class: "eye" %>
 
-  <%= link_to "О нас", pages_about_path %> |
-  <%= link_to "Профиль", pages_profile_path %> | 
-  <%= link_to "Статьи", pages_articles_path %>
-  <%= link_to "Создать проект", new_project_path %> 
+<nav class="main-nav">
+  <%= link_to "Проекты", root_path, class: "nav-link" %>
+  <%= link_to "О нас", pages_about_path, class: "nav-link" %>
+  <%= link_to "Профиль", pages_profile_path, class: "nav-link" %>
+  <%= link_to "Создать проект", new_project_path, class: "nav-button" %>
 </nav>
+
+<%= image_tag "vectorsearch.svg", class: "search" %>
+</div>
     <%= yield %>
   </body>
 </html>

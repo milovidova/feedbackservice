@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_04_182403) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_21_013120) do
   create_table "feedbacks", force: :cascade do |t|
     t.integer "project_id"
     t.integer "user_id"
@@ -41,6 +41,12 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_04_182403) do
     t.string "experience_level"
     t.text "skills"
     t.integer "balance", default: 3
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "waitlists", force: :cascade do |t|
+    t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

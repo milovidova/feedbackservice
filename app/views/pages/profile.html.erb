@@ -1,1 +1,113 @@
-<h1>Профиль</h1>
+  
+  
+  <div class="profile-container comment-cursor-mode">
+
+<div class='firstblock'>
+<p class="first">Fresh Eye Design</p>
+<p class="longtext">Fresh Eye — это сообщество дизайнеров, <br> где мы помогаем друг другу расти через честную <br> и конструктивную обратную связь</p>
+</div>
+  
+<%= image_tag "firstscreen.png", class: "firstscreen" %>
+<p class="second">Fresh Eye Design</p>
+
+  
+
+
+  
+  
+  
+ 
+  <div class="figma-comment-system">
+    <div class="comment-instance" id="commentInstance" style="display: none;">
+      <div class="comment-icon">
+   
+        <svg width="20" height="20" viewBox="0 0 64 64" fill="none">
+          <rect y="29.2266" width="34.7046" height="34.7046" fill="#0B99FF"/>
+          <circle cx="31.9653" cy="31.9653" r="31.9653" fill="#0B99FF"/>
+        </svg>
+      </div>
+      <div class="comment-field">
+        <input type="email" placeholder="Добавьте почту" class="email-input">
+       <button type="submit" class="submit-arrow">
+
+ <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="23.8953" cy="23.8953" r="23.8953" fill="#D9D9D9" />
+  <path d="M25.4677 19.1288V32.2572H23.3106V19.1288L17.5251 24.9142L16 23.3891L24.3891 15L32.7783 23.3891L31.2532 24.9142L25.4677 19.1288Z" fill="#979797" />
+</svg>
+</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+document.addEventListener('DOMContentLoaded', function() {
+  const customCursor = "url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" viewBox=\"0 0 64 64\" fill=\"none\"><rect y=\"29.2266\" width=\"34.7046\" height=\"34.7046\" fill=\"%230B99FF\"/><circle cx=\"31.9653\" cy=\"31.9653\" r=\"31.9653\" fill=\"%230B99FF\"/></svg>') 16 16, auto";
+  document.querySelector('.profile-container').style.cursor = customCursor;
+});
+
+
+document.querySelector('.profile-container').addEventListener('click', function(event) {
+  const commentInstance = document.getElementById('commentInstance');
+  
+
+  if (!event.target.closest('.comment-instance') && commentInstance.style.display === 'none') {
+
+    commentInstance.style.display = 'flex';
+    
+ 
+    commentInstance.style.position = 'fixed';
+    commentInstance.style.left = (event.clientX - 20) + 'px';
+    commentInstance.style.top = (event.clientY - 20) + 'px';
+    
+
+    setTimeout(() => {
+      const input = commentInstance.querySelector('.email-input');
+      if (input) input.focus();
+    }, 100);
+    
+  
+    event.stopPropagation();
+  }
+});
+
+
+document.addEventListener('click', function(event) {
+  if (event.target.classList.contains('submit-arrow') || event.target.closest('.submit-arrow')) {
+    event.preventDefault();
+    event.stopPropagation();
+    
+    const commentInstance = event.target.closest('.comment-instance');
+    const input = commentInstance.querySelector('.email-input');
+    const email = input.value;
+    
+    if (email) {
+
+      fetch('/waitlist', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content
+        },
+        body: JSON.stringify({ waitlist: { email: email } })
+      }).then(response => {
+        if (response.ok) {
+       
+          const field = commentInstance.querySelector('.comment-field');
+          field.style.display = 'none';
+          input.value = '';
+        }
+      });
+    }
+  }
+});
+
+
+document.addEventListener('click', function(event) {
+  const commentInstance = document.getElementById('commentInstance');
+  if (commentInstance.style.display === 'flex' && !event.target.closest('.comment-instance')) {
+    commentInstance.style.display = 'none';
+  }
+});
+</script>

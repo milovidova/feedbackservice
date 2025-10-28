@@ -19,4 +19,5 @@ Rails.application.routes.draw do
   get "pages/profile"    
   get "pages/articles"
   resources :projects
+  post '/waitlist', to: 'waitlists#create'
 end
