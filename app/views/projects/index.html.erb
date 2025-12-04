@@ -1,28 +1,379 @@
-<h1>Проекты</h1>
+
+<h1 style="font-family: 'Gilroy-Semibold'; font-weight: 400; font-size: 28px; color: #000; margin-left: 34px; margin-top: 46px">
+  Проекты
+</h1>
+
+
+<div style="position: fixed; top: 110px; right: 35px; z-index: 1000; padding: 10px;">
+  <div style="display: flex; flex-direction: column; gap: 45px;">
+   <%= link_to 'Порядок', '/projects/grid', 
+                style: "padding-top: 12px; text-decoration: none; text-transform: uppercase; text-align: center; font-family: 'Gilroy'; font-size: 14px; font-weight: 400; border-radius: 20px; width: 140px; height: 27px; #{@view_mode == :grid ? 'background: #191919; color: white;' : 'background: #f8f9fa; color: #333; border: 0.80px solid #191919;'}" %>
+    <%= link_to 'Хаос', projects_path, 
+                style: "padding-top: 12px; text-decoration: none; text-transform: uppercase; text-align: center; font-family: 'Gilroy'; font-size: 14px; font-weight: 400; border-radius: 20px; width: 140px; height: 27px; transform: rotate(38deg); #{@view_mode == :gallery ? 'background: #191919; color: white;' : 'background: #f8f9fa; color: #333; border: 0.80px solid #191919;'}" %>
+  </div>
+</div>
+
 
 <% if @projects.any? %>
-  <% @projects.each do |project| %>
-    <div>
-      <h2><%= project.title %></h2>
-      
-      <% if project.image.present? %>
-        <%= image_tag project.image.url, width: 600 %>
-      <% end %>
-      
-      <p><strong>Описание:</strong> <%= project.description %></p>
-      <p><strong>Категория:</strong> <%= project.category %></p>
-      <p><strong>Автор:</strong> <%= project.user.username %></p>
-      
+  <% if @view_mode == :gallery %>
 
-      <h3>Фидбеки (<%= project.feedbacks.count %>):</h3>
-      <% project.feedbacks.each do |feedback| %>
-        <div>
-          <p><strong><%= feedback.user.username %>:</strong> <%= feedback.content %></p>
-          <p>Категория: <%= feedback.category %> | Полезный: <%= feedback.is_helpful ? '✅ Да' : '❌ Нет' %></p>
+    <% display_projects = @projects.first(20) %>
+    <div id="chaos-container" style="position: relative; width: 100%; min-height: 2500px; margin-top: 50px; background: transparent;">
+      <% 
+
+        occupied_positions = []
+        grid_size = 100 
+      %>
+      
+      <% display_projects.each_with_index do |project, index| %>
+        <% 
+        
+          min_width = 220
+          max_width = 380
+          min_height = 220
+          max_height = 350
+          
+          random_width = rand(min_width..max_width)
+          random_height = rand(min_height..max_height)
+          
+
+          random_rotate = rand(-12..12)
+          
+         
+          max_attempts = 100
+          found_position = false
+          random_x = 0
+          random_y = 0
+          
+          max_attempts.times do |attempt|
+            
+            temp_x = rand(0..85) 
+            temp_y = rand(0..2000) 
+            
+       
+            collision = false
+            cell_x = (temp_x / 10).floor
+            cell_y = (temp_y / grid_size).floor
+            
+       
+            (cell_y-1..cell_y+1).each do |check_y|
+              (cell_x-1..cell_x+1).each do |check_x|
+                if occupied_positions.include?([check_x, check_y])
+                  collision = true
+                  break
+                end
+              end
+              break if collision
+            end
+            
+            unless collision
+              found_position = true
+              random_x = temp_x
+              random_y = temp_y
+              
+ 
+              (cell_y-1..cell_y+1).each do |occupy_y|
+                (cell_x-1..cell_x+1).each do |occupy_x|
+                  occupied_positions << [occupy_x, occupy_y]
+                end
+              end
+              break
+            end
+          end
+          
+         
+          unless found_position
+            random_x = rand(0..85)
+            random_y = rand(occupied_positions.empty? ? 0 : occupied_positions.last[1] * grid_size + 200..occupied_positions.empty? ? 1000 : occupied_positions.last[1] * grid_size + 400)
+          end
+          
+
+          random_z = index + 10
+          
+         
+          small_offset_x = rand(-15..15)
+          small_offset_y = rand(-10..10)
+        %>
+        
+        <div class="chaos-project" 
+             data-project-id="<%= project.id %>"
+             style="position: absolute; 
+                    left: calc(<%= random_x %>% + <%= small_offset_x %>px); 
+                    top: <%= random_y + small_offset_y %>px; 
+                    width: <%= random_width %>px; 
+                    height: <%= random_height %>px; 
+                    transform: rotate(<%= random_rotate %>deg); 
+                    z-index: <%= random_z %>; 
+                    cursor: move;
+                    overflow: hidden;">
+          
+   
+          <a href="<%= project_path(project) %>" 
+             class="project-link"
+             style="display: block; width: 100%; height: 100%; text-decoration: none;">
+            <% if project.image.present? %>
+              <%= image_tag project.image.url, 
+                    style: "width: 100%; height: 100%; object-fit: contain; background: transparent;",
+                    alt: "",
+                    class: "project-image" %>
+            <% else %>
+              <div style="width: 100%; height: 100%; background: transparent; display: flex; align-items: center; justify-content: center; color: #999; font-size: 14px;">
+                📷
+              </div>
+            <% end %>
+          </a>
         </div>
       <% end %>
     </div>
+    
+  <% else %>
+  
+    <div style="width: 100%; margin-top: 30px; padding: 0;">
+      <% 
+      
+        row_patterns = [
+   
+          { columns: [288, 288, 288, 576], count: 4 },
+
+          { columns: [576, 576, 288], count: 3 }
+        ]
+        
+        row_height = 553
+        projects_per_page = 20
+        displayed_projects = @projects.first(projects_per_page)
+        project_index = 0
+        row_index = 0
+      %>
+      
+      <% while project_index < displayed_projects.length %>
+        <% 
+    
+          pattern = row_patterns[row_index % 2]
+          columns = pattern[:columns]
+          row_projects = displayed_projects[project_index, columns.length] || []
+        %>
+        
+    
+        <div style="display: flex; height: <%= row_height %>px; <%= row_index > 0 ? 'border-top: 1px solid #D9D9D9;' : '' %>">
+          <% columns.each_with_index do |column_width, col_index| %>
+            <% 
+              project = row_projects[col_index]
+              # Для последней колонки в ряду убираем правую границу
+              border_right = col_index < columns.length - 1 ? 'border-right: 1px solid #D9D9D9;' : ''
+            %>
+            
+            <div style="width: <%= column_width %>px; height: 100%; position: relative; <%= border_right %>">
+              <% if project %>
+                <%= link_to project_path(project), style: "display: block; width: 100%; height: 100%; text-decoration: none; color: inherit;" do %>
+                  
+              
+                  <div style="position: absolute; top: 20px; left: 20px;">
+                    <div style="font-family: 'Gilroy'; font-size: 12px; color: #000; margin-bottom: 8px;">
+                      Категория
+                    </div>
+                    <div style="font-family: 'Gilroy'; font-size: 12px; color: #000;">
+                      <%= project.category %>
+                    </div>
+                  </div>
+                  
+               
+                  <div style="position: absolute; top: 98px; left: 20px; font-family: 'Gilroy'; font-size: 24px; color: #000; font-weight: 500;">
+                    <%= project.title.split.first %>
+                  </div>
+                  
+             
+                  <div style="position: absolute; top: 177px; left: 20px; width: <%= column_width - 40 %>px; height: 273px; overflow: hidden;">
+                    <% if project.image.present? %>
+                      <%= image_tag project.image.url, 
+                            style: "width: 100%; height: 100%; object-fit: cover;",
+                            alt: project.title %>
+                    <% else %>
+                      <div style="width: 100%; height: 100%; background: #f5f5f5; display: flex; align-items: center; justify-content: center; color: #999; font-size: 14px;">
+                        📷
+                      </div>
+                    <% end %>
+                  </div>
+                  
+           
+                  <div style="position: absolute; bottom: 20px; left: 20px; right: 20px; display: flex; justify-content: space-between; font-family: 'Gilroy'; font-size: 12px; color: #000;">
+                    <span>Автор</span>
+                    <span><%= project.user.username %></span>
+                  </div>
+                  
+                <% end %>
+              <% else %>
+          
+                <div style="width: 100%; height: 100%; background: #fafafa;"></div>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+        
+        <% 
+          project_index += columns.length
+          row_index += 1
+        %>
+      <% end %>
+    </div>
   <% end %>
+  
 <% else %>
- 
+
+  <div style="text-align: center; padding: 60px 20px; color: #666;">
+    <h3 style="margin-bottom: 20px;">Пока нет проектов</h3>
+    <p style="margin-bottom: 30px;">Будьте первым, кто добавит проект!</p>
+    <%= link_to '➕ Создать проект', new_project_path, 
+                style: "padding: 12px 30px; border-radius: 6px; text-decoration: none; background: #28a745; color: white; display: inline-block;" %>
+  </div>
 <% end %>
+
+<%# Вставьте этот исправленный JavaScript вместо старого %>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  let isDragging = false;
+  let currentProject = null;
+  let startX = 0;
+  let startY = 0;
+  let initialLeft = 0;
+  let initialTop = 0;
+  
+  
+  const projects = document.querySelectorAll('.chaos-project');
+  
+  projects.forEach(project => {
+
+    project.addEventListener('mousedown', startDrag);
+  });
+  
+  function startDrag(e) {
+
+    if (e.target.tagName === 'A' || e.target.closest('a')) {
+
+      const clickTimer = setTimeout(() => {
+   
+        if (!isDragging) {
+          return;
+        }
+      }, 200);
+      
+
+      document.addEventListener('mousemove', function cancelClick() {
+        clearTimeout(clickTimer);
+        document.removeEventListener('mousemove', cancelClick);
+      });
+      
+      e.preventDefault();
+    }
+    
+  
+    startX = e.clientX;
+    startY = e.clientY;
+    
+    
+    const style = window.getComputedStyle(this);
+    initialLeft = parseFloat(style.left) || 0;
+    initialTop = parseFloat(style.top) || 0;
+    
+
+    this.style.zIndex = 9999;
+    this.style.cursor = 'grabbing';
+    
+
+    currentProject = this;
+    isDragging = true;
+    
+
+    const link = this.querySelector('a');
+    if (link) {
+      link.style.pointerEvents = 'none';
+    }
+    
+
+    document.addEventListener('mousemove', drag);
+    document.addEventListener('mouseup', stopDrag);
+    
+    e.stopPropagation();
+  }
+  
+  function drag(e) {
+    if (!isDragging || !currentProject) return;
+    
+
+    const deltaX = e.clientX - startX;
+    const deltaY = e.clientY - startY;
+    
+
+    let newLeft = initialLeft + deltaX;
+    let newTop = initialTop + deltaY;
+    
+
+    const container = document.getElementById('chaos-container');
+    const containerWidth = container.offsetWidth;
+    const containerHeight = container.offsetHeight;
+    const projectWidth = currentProject.offsetWidth;
+    const projectHeight = currentProject.offsetHeight;
+    
+    
+    newLeft = Math.max(-50, Math.min(newLeft, containerWidth - projectWidth + 50));
+    newTop = Math.max(-50, Math.min(newTop, containerHeight - projectHeight + 50));
+    
+
+    currentProject.style.left = newLeft + 'px';
+    currentProject.style.top = newTop + 'px';
+  }
+  
+  function stopDrag(e) {
+    if (!isDragging || !currentProject) return;
+    
+
+    const link = currentProject.querySelector('a');
+    if (link) {
+     
+      setTimeout(() => {
+        link.style.pointerEvents = 'auto';
+      }, 100);
+    }
+    
+  
+    currentProject.style.cursor = 'move';
+    
+
+    setTimeout(() => {
+      if (currentProject) {
+        const projectIndex = Array.from(projects).indexOf(currentProject);
+        currentProject.style.zIndex = projectIndex + 10;
+      }
+    }, 100);
+    
+   
+    document.removeEventListener('mousemove', drag);
+    document.removeEventListener('mouseup', stopDrag);
+    
+
+    isDragging = false;
+    currentProject = null;
+    
+    
+    if (Math.abs(e.clientX - startX) > 5 || Math.abs(e.clientY - startY) > 5) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+  }
+  
+
+  document.addEventListener('selectstart', function(e) {
+    if (isDragging) {
+      e.preventDefault();
+    }
+  });
+  
+
+  projects.forEach(project => {
+    project.addEventListener('contextmenu', function(e) {
+      e.preventDefault();
+    });
+  });
+});
+</script>

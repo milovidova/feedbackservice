@@ -1,0 +1,365 @@
+<div style="min-height: 100vh; padding-left: 34px; padding-top: 46px; font-family: 'Gilroy'; position: relative;">
+
+  <a href="<%= projects_path %>" 
+     style="font-family: 'Gilroy-Semibold'; font-size: 28px; color: #000; text-decoration: none; display: block; margin-bottom: 31px;">
+    К проектам
+  </a>
+  
+
+  <div style="display: flex; justify-content: space-between; align-items: flex-start; max-width: 1200px;">
+    
+  
+    <div style="flex-shrink: 0;">
+    
+      <div style="border: 1px solid #000; width: 369px; height: 656px; position: relative; padding: 0 20px;">
+  
+        <div style="position: absolute; top: 25px; left: 0; right: 0; text-align: center;">
+          <div style="font-size: 20px; margin-bottom: 69px; font-weight: 500;">
+            <%= @project.title %>
+          </div>
+          
+     
+          <div style="font-size: 20px; margin-bottom: 5px;">
+            категория
+          </div>
+          <div style="font-size: 20px; margin-bottom: 69px;">
+            <%= @project.category %>
+          </div>
+          
+     
+          <div style="font-size: 20px; margin-bottom: 5px;">
+            автор
+          </div>
+          <div style="font-size: 20px; margin-bottom: 69px;">
+            <%= @project.user.username %>
+          </div>
+          
+        
+          <div style="font-size: 20px; margin-bottom: 5px;">
+            запрос фидбека
+          </div>
+          <div style="font-size: 20px; margin-left: 50px; margin-bottom: 69px; max-height: 60px; max-width: 300px; line-height: 1.2; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;">
+            <%= @project.feedback_request.presence || "Нет запроса" %>
+          </div>
+          
+
+          <%= button_to 'удалить пост', project_path(@project), 
+                        method: :delete, 
+                        data: { confirm: 'Вы уверены, что хотите удалить этот проект?' },
+                        style: "font-family: 'Gilroy'; font-size: 20px; background: none; border: none; color: #000; cursor: pointer; padding-top: 90px;" %>
+        </div>
+      </div>
+    </div>
+    
+
+    <div style="position: relative; margin-top: 10px; margin-left: 200px; flex: 1; display: flex; flex-direction: column; align-items: center;">
+      <% if @project.image.present? %>
+        <div id="project-image-container" 
+             style="position: relative; cursor: pointer;">
+          
+   
+          <div id="custom-cursor" 
+               style="position: absolute; width: 52px; height: 52px; pointer-events: none; opacity: 0; z-index: 10; transition: opacity 0.2s;">
+            <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect y="23.4741" width="27.8746" height="27.8746" fill="#ECFFB8"/>
+              <circle cx="25.6741" cy="25.6741" r="25.6741" fill="#ECFFB8"/>
+            </svg>
+          </div>
+          
+  
+          <%= image_tag @project.image.url, 
+                id: "project-main-image",
+                style: "max-height: 500px; width: auto; display: block; transform: rotate(-5deg);",
+                alt: @project.title %>
+          
+          <!-- Область для добавления фидбека -->
+          <div id="feedback-form-overlay" 
+               style="position: absolute; display: none; z-index: 100;">
+          </div>
+        </div>
+        
+
+        <div id="bottom-text" 
+             style="font-family: 'Gilroy'; font-size: 20px; line-height: 1.4; margin-top: 100px; text-align: center; width: 100%;">
+          It is a long established fact that a reader
+          It is <br>a long established fact that a reader
+        </div>
+      <% else %>
+        <div style="width: 400px; height: 500px; background: #f0f0f0; display: flex; align-items: center; justify-content: center; color: #999; font-size: 20px; transform: rotate(-5deg);">
+          📷 Нет изображения
+        </div>
+        
+
+        <div id="bottom-text" 
+             style="font-family: 'Gilroy'; font-size: 20px; line-height: 1.4; margin-top: 70px; text-align: center; width: 100%;">
+          It is a long established fact that a reader
+          It is <br>a long established fact that a reader
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+
+<div id="feedback-form-template" style="display: none;">
+  <div style="display: flex; align-items: center; gap: 25px;">
+ 
+    <div style="flex-shrink: 0;">
+      <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect y="23.4741" width="27.8746" height="27.8746" fill="#ECFFB8"/>
+        <circle cx="25.6741" cy="25.6741" r="25.6741" fill="#ECFFB8"/>
+      </svg>
+    </div>
+    
+    
+    <div style="position: relative; width: 474px;">
+      <form id="inline-feedback-form" style="margin: 0;">
+        <div style="display: flex; align-items: center; background: #F8F8F8; border-radius: 20px; padding: 0 25px; min-height: 64px;">
+          <input type="text" 
+                 name="feedback[content]" 
+                 placeholder="Добавить фидбек" 
+                 style="flex: 1; background: none; border: none; font-family: 'Gilroy'; font-weight: 400; font-size: 20px; color: #b2b2b2; outline: none;"
+                 autocomplete="off">
+          
+     
+          <button type="submit" 
+                  style="background: #d9d9d9; border: none; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; margin-left: 10px; flex-shrink: 0;">
+            <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12.9036 6.80408V17.3831H11.1654V6.80408L6.50336 11.4661L5.27441 10.2371L12.0345 3.47705L18.7946 10.2371L17.5657 11.4661L12.9036 6.80408Z" fill="#979797"/>
+            </svg>
+          </button>
+          
+       
+          <input type="hidden" name="feedback[category]" value="Композиция">
+          <input type="hidden" name="feedback[is_helpful]" value="false">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<style>
+
+  input::placeholder {
+    color: #b2b2b2 !important;
+    opacity: 1 !important; /* Для Firefox */
+  }
+  
+  /* Для разных браузеров */
+  input::-webkit-input-placeholder {
+    color: #b2b2b2 !important;
+  }
+  
+  input::-moz-placeholder {
+    color: #b2b2b2 !important;
+    opacity: 1 !important;
+  }
+  
+  input:-ms-input-placeholder {
+    color: #b2b2b2 !important;
+  }
+  
+  input::-ms-input-placeholder {
+    color: #b2b2b2 !important;
+  }
+</style>
+
+
+<div id="feedback-display-template" style="display: none;">
+  <div style="display: flex; align-items: flex-start; gap: 25px; cursor: pointer;">
+    <!-- Иконка -->
+    <div style="flex-shrink: 0;">
+      <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect y="23.4741" width="27.8746" height="27.8746" fill="#ECFFB8"/>
+        <circle cx="25.6741" cy="25.6741" r="25.6741" fill="#ECFFB8"/>
+      </svg>
+    </div>
+    
+
+    <div class="feedback-content" 
+         style="background: #F8F8F8; border-radius: 20px; padding: 20px 25px; max-width: 474px; font-family: 'Gilroy'; font-size: 20px; color: #b2b2b2; line-height: 1.4; word-wrap: break-word;">
+      <!-- Текст фидбека будет вставлен сюда -->
+    </div>
+  </div>
+</div>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const projectImageContainer = document.getElementById('project-image-container');
+  const customCursor = document.getElementById('custom-cursor');
+  const projectImage = document.getElementById('project-main-image');
+  const feedbackFormTemplate = document.getElementById('feedback-form-template');
+  const feedbackDisplayTemplate = document.getElementById('feedback-display-template');
+  
+
+  let activeFeedback = null;
+  let clickPosition = { x: 0, y: 0 };
+  
+
+  if (projectImageContainer && customCursor && projectImage) {
+    projectImageContainer.addEventListener('mousemove', function(e) {
+      const rect = this.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      customCursor.style.left = (x - 26) + 'px';
+      customCursor.style.top = (y - 26) + 'px';
+      customCursor.style.opacity = '1';
+    });
+    
+    projectImageContainer.addEventListener('mouseleave', function() {
+      customCursor.style.opacity = '0';
+    });
+    
+    
+    projectImageContainer.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      const rect = this.getBoundingClientRect();
+      clickPosition = {
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top
+      };
+      
+      if (activeFeedback) {
+        hideActiveFeedback();
+      }
+      
+      showFeedbackForm();
+    });
+  }
+  
+
+  function showFeedbackForm() {
+    if (!projectImageContainer || !feedbackFormTemplate) return;
+    
+    const oldForm = document.getElementById('feedback-form-overlay');
+    if (oldForm) {
+      oldForm.remove();
+    }
+    
+    const formOverlay = document.createElement('div');
+    formOverlay.id = 'feedback-form-overlay';
+    formOverlay.style.position = 'absolute';
+    formOverlay.style.left = (clickPosition.x - 300) + 'px';
+    formOverlay.style.top = (clickPosition.y - 32) + 'px'; // -32 чтобы выровнять по центру высоты
+    formOverlay.style.zIndex = '100';
+    formOverlay.style.display = 'block';
+    
+    const formContent = feedbackFormTemplate.cloneNode(true);
+    formContent.style.display = 'block';
+    formContent.id = 'active-feedback-form';
+    
+    formOverlay.appendChild(formContent);
+    projectImageContainer.appendChild(formOverlay);
+    
+    activeFeedback = formOverlay;
+    
+    setTimeout(() => {
+      const input = formOverlay.querySelector('input[name="feedback[content]"]');
+      if (input) input.focus();
+    }, 100);
+    
+    const form = formOverlay.querySelector('#inline-feedback-form');
+    if (form) {
+      form.addEventListener('submit', handleFeedbackSubmit);
+    }
+    
+    document.addEventListener('click', closeFormOnClickOutside);
+  }
+  
+  
+  function showExistingFeedback(feedbackData) {
+    if (!projectImageContainer || !feedbackDisplayTemplate) return;
+    
+    const oldFeedback = document.getElementById('feedback-form-overlay');
+    if (oldFeedback) {
+      oldFeedback.remove();
+    }
+    
+    const feedbackOverlay = document.createElement('div');
+    feedbackOverlay.id = 'feedback-form-overlay';
+    feedbackOverlay.style.position = 'absolute';
+    feedbackOverlay.style.left = (clickPosition.x - 300) + 'px';
+    feedbackOverlay.style.top = (clickPosition.y - 32) + 'px';
+    feedbackOverlay.style.zIndex = '100';
+    feedbackOverlay.style.display = 'block';
+    
+    const feedbackContent = feedbackDisplayTemplate.cloneNode(true);
+    feedbackContent.style.display = 'block';
+    
+    const feedbackText = feedbackContent.querySelector('.feedback-content');
+    if (feedbackText) {
+      feedbackText.textContent = feedbackData.content;
+    }
+    
+    feedbackOverlay.appendChild(feedbackContent);
+    projectImageContainer.appendChild(feedbackOverlay);
+    
+    activeFeedback = feedbackOverlay;
+    document.addEventListener('click', closeFormOnClickOutside);
+  }
+  
+
+  function handleFeedbackSubmit(e) {
+    e.preventDefault();
+    
+    const form = e.target;
+    const formData = new FormData(form);
+    const projectId = '<%= @project.id %>';
+    
+    if (!formData.get('feedback[category]')) {
+      formData.set('feedback[category]', 'Композиция');
+    }
+    if (!formData.get('feedback[is_helpful]')) {
+      formData.set('feedback[is_helpful]', 'false');
+    }
+    
+  
+    fetch(`/projects/${projectId}/feedbacks`, {
+      method: 'POST',
+      body: formData,
+      headers: {
+        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content,
+        'Accept': 'application/json'
+      }
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      if (data.success) {
+        showExistingFeedback(data.feedback);
+      } else {
+        alert('Ошибка: ' + (data.errors || 'Не удалось добавить фидбек'));
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('Ошибка при отправке фидбека');
+    });
+  }
+  
+ 
+  function closeFormOnClickOutside(e) {
+    if (activeFeedback && !activeFeedback.contains(e.target) && 
+        !projectImageContainer.contains(e.target)) {
+      hideActiveFeedback();
+    }
+  }
+  
+
+  function hideActiveFeedback() {
+    if (activeFeedback) {
+      activeFeedback.remove();
+      activeFeedback = null;
+      document.removeEventListener('click', closeFormOnClickOutside);
+    }
+  }
+});
+</script>

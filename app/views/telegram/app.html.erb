@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RE:FORM в Telegram</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #FBFBFB;
+            color: #101010;
+            padding: 16px;
+            line-height: 1.4;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #E5E5E5;
+        }
+        
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 8px;
+            color: #101010;
+        }
+        
+        .tabs {
+            display: flex;
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            border: 1px solid #E5E5E5;
+        }
+        
+        .tab {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            background: white;
+            text-align: center;
+            font-size: 14px;
+            cursor: pointer;
+            color: #666;
+        }
+        
+        .tab.active {
+            background: #F1FFCC;
+            color: #101010;
+            font-weight: 600;
+        }
+        
+        .section {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .form-group {
+            margin-bottom: 16px;
+        }
+        
+        .input, .textarea, .select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #E5E5E5;
+            border-radius: 12px;
+            font-size: 16px;
+            background: white;
+        }
+        
+        .textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .file-upload {
+            border: 2px dashed #E5E5E5;
+            border-radius: 12px;
+            padding: 40px 20px;
+            text-align: center;
+            cursor: pointer;
+            margin-bottom: 16px;
+            background: white;
+        }
+        
+        .file-upload:hover {
+            border-color: #F1FFCC;
+            background: #F8F9FA;
+        }
+        
+        .file-upload span {
+            font-size: 48px;
+            display: block;
+            margin-bottom: 8px;
+        }
+        
+        .file-preview {
+            max-width: 100%;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            display: none;
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 16px;
+            background: #101010;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 8px;
+        }
+        
+        .btn:active {
+            transform: scale(0.98);
+        }
+        
+        .btn-success {
+            background: #F1FFCC;
+            color: #101010;
+        }
+        
+        .btn-feedback {
+            background: #28a745;
+            color: white;
+            padding: 8px 16px;
+            font-size: 14px;
+            width: auto;
+        }
+        
+        .projects-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        
+        .project-card {
+            background: white;
+            border: 1px solid #E5E5E5;
+            border-radius: 12px;
+            padding: 16px;
+            position: relative;
+        }
+        
+        .project-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #101010;
+        }
+        
+        .project-author {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+        
+        .project-image {
+            max-width: 100%;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+        
+        .project-description {
+            font-size: 14px;
+            color: #101010;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+        
+        .project-meta {
+            font-size: 14px;
+            color: #666;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+        
+        .feedback-count {
+            background: #F1FFCC;
+            color: #101010;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .feedbacks-section {
+            margin-top: 16px;
+            border-top: 1px solid #E5E5E5;
+            padding-top: 16px;
+        }
+        
+        .feedback-item {
+            background: #F8F9FA;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+        }
+        
+        .feedback-author {
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 4px;
+            color: #101010;
+        }
+        
+        .feedback-content {
+            font-size: 14px;
+            color: #101010;
+            margin-bottom: 4px;
+        }
+        
+        .feedback-meta {
+            font-size: 12px;
+            color: #666;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #101010;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 12px;
+            z-index: 1000;
+            display: none;
+            max-width: 90%;
+            text-align: center;
+        }
+        
+        .notification.show {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+        
+        @keyframes slideDown {
+            from {
+                transform: translateX(-50%) translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(-50%) translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #666;
+        }
+        
+        .feedback-form {
+            background: white;
+            border: 1px solid #E5E5E5;
+            border-radius: 12px;
+            padding: 16px;
+            margin-top: 16px;
+            display: none;
+        }
+        
+        .feedback-form.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>RE:FORM</h1>
+            <div id="userInfo">👤 Загрузка...</div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('create')">📤 Создать</button>
+            <button class="tab" onclick="showTab('view')">📁 Мои проекты</button>
+            <button class="tab" onclick="showTab('community')">🌐 Сообщество</button>
+        </div>
+
+        <!-- Create Project Section -->
+        <div id="create" class="section active">
+            <div class="file-upload" onclick="document.getElementById('projectImage').click()">
+                <span>📷</span>
+                <p><strong>Нажмите чтобы загрузить скриншот</strong></p>
+                <small>PNG, JPG до 5MB</small>
+            </div>
+            <input type="file" id="projectImage" accept="image/*" hidden onchange="previewImage(event)">
+            <img id="imagePreview" class="file-preview" alt="Превью">
+            
+            <div class="form-group">
+                <input type="text" id="projectTitle" placeholder="Название проекта" class="input" maxlength="100">
+            </div>
+            
+            <div class="form-group">
+                <textarea id="projectDescription" placeholder="Описание проекта" class="textarea"></textarea>
+            </div>
+
+            <div class="form-group">
+                <select id="projectCategory" class="select">
+                    <option value="">Выберите категорию</option>
+                    <option value="UI/UX дизайн">UI/UX дизайн</option>
+                    <option value="Графический дизайн">Графический дизайн</option>
+                    <option value="Продуктовый дизайн">Продуктовый дизайн</option>
+                    <option value="Веб дизайн">Веб дизайн</option>
+                    <option value="Мобильный дизайн">Мобильный дизайн</option>
+                    <option value="Брендинг">Брендинг</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <textarea id="feedbackRequest" placeholder="На что хочешь получить фидбек?" class="textarea"></textarea>
+            </div>
+
+            <button class="btn btn-success" onclick="createProject()">🚀 Опубликовать</button>
+        </div>
+
+        <!-- View My Projects Section -->
+        <div id="view" class="section">
+            <div id="myProjectsList" class="loading">
+                Загрузка ваших проектов...
+            </div>
+        </div>
+
+        <!-- Community Projects Section -->
+        <div id="community" class="section">
+            <div id="communityProjectsList" class="loading">
+                Загрузка проектов сообщества...
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification"></div>
+
+    <script>
+   
+        const API_BASE = '/telegram';
+        
+        
+        let currentUser = null;
+        let projects = [];
+        let selectedImage = null;
+        let currentFeedbackProjectId = null;
+        
+      
+        function showNotification(message, type = 'info') {
+            console.log('📢', message);
+            const el = document.getElementById('notification');
+            el.textContent = message;
+            el.className = `notification ${type}`;
+            el.classList.add('show');
+            
+            setTimeout(() => el.classList.remove('show'), 3000);
+        }
+        
+      
+        function showTab(tabName) {
+            // Табы
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            
+            document.querySelector(`[onclick="showTab('${tabName}')"]`).classList.add('active');
+            document.getElementById(tabName).classList.add('active');
+            
+            // Загрузка данных
+            if (tabName === 'view') {
+                loadMyProjects();
+            } else if (tabName === 'community') {
+                loadCommunityProjects();
+            }
+        }
+        
+      
+        function initTelegram() {
+            const tg = window.Telegram?.WebApp;
+            
+            if (tg) {
+                tg.expand();
+                tg.enableClosingConfirmation();
+                
+                currentUser = tg.initDataUnsafe?.user || {
+                    id: 1,
+                    username: 'telegram_user',
+                    first_name: 'Пользователь'
+                };
+                
+                document.getElementById('userInfo').textContent = `👤 @${currentUser.username || currentUser.first_name}`;
+            } else {
+                currentUser = { id: 1, username: 'browser_user', first_name: 'Браузер' };
+                document.getElementById('userInfo').textContent = '👤 Тестовый режим';
+            }
+            
+            console.log('Пользователь:', currentUser);
+        }
+        
+       
+        function previewImage(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            if (!file.type.match('image.*')) {
+                showNotification('❌ Выберите изображение', 'error');
+                return;
+            }
+            
+            if (file.size > 5 * 1024 * 1024) {
+                showNotification('❌ Файл слишком большой (макс. 5MB)', 'error');
+                return;
+            }
+            
+            selectedImage = file;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const preview = document.getElementById('imagePreview');
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+            
+            showNotification('✅ Изображение загружено');
+        }
+        
+        
+        async function createProject() {
+            const title = document.getElementById('projectTitle').value.trim();
+            const description = document.getElementById('projectDescription').value.trim();
+            const category = document.getElementById('projectCategory').value;
+            const feedbackRequest = document.getElementById('feedbackRequest').value.trim();
+            
+           
+            if (!title) return showNotification('❌ Введите название', 'error');
+            if (!category) return showNotification('❌ Выберите категорию', 'error');
+            
+            showNotification('⏳ Публикую...');
+            
+            try {
+                const formData = new FormData();
+                formData.append('project[title]', title);
+                formData.append('project[description]', description);
+                formData.append('project[category]', category);
+                formData.append('project[feedback_request]', feedbackRequest);
+                
+                if (selectedImage) {
+                    formData.append('project[image]', selectedImage);
+                }
+                
+                const response = await fetch(`${API_BASE}/create_project`, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-CSRF-Token': '<%= form_authenticity_token %>'
+                    }
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showNotification('✅ Проект создан!');
+                    
+                    // Очистка формы
+                    ['projectTitle', 'projectDescription', 'projectCategory', 'feedbackRequest'].forEach(id => {
+                        document.getElementById(id).value = '';
+                    });
+                    
+                    document.getElementById('projectImage').value = '';
+                    document.getElementById('imagePreview').style.display = 'none';
+                    selectedImage = null;
+                    
+                    // Обновление списка
+                    setTimeout(() => {
+                        showTab('view');
+                        loadMyProjects();
+                    }, 500);
+                } else {
+                    showNotification(`❌ ${result.errors?.join(', ') || 'Ошибка'}`, 'error');
+                }
+            } catch (error) {
+                console.error('Ошибка создания:', error);
+                showNotification('❌ Ошибка сети', 'error');
+            }
+        }
+        
+    
+        async function loadMyProjects() {
+            const container = document.getElementById('myProjectsList');
+            container.innerHTML = '<div class="loading">🔄 Загрузка ваших проектов...</div>';
+            
+            try {
+                const response = await fetch(`${API_BASE}/my_projects`);
+                if (!response.ok) throw new Error('HTTP ' + response.status);
+                
+                const myProjects = await response.json();
+                console.log('Мои проекты:', myProjects.length);
+                renderProjects(container, myProjects, false); // false = мои проекты
+            } catch (error) {
+                console.error('Ошибка загрузки:', error);
+                container.innerHTML = '<div class="empty-state">❌ Ошибка загрузки проектов</div>';
+                showNotification('❌ Не удалось загрузить ваши проекты', 'error');
+            }
+        }
+        
+        
+        async function loadCommunityProjects() {
+            const container = document.getElementById('communityProjectsList');
+            container.innerHTML = '<div class="loading">🔄 Загрузка проектов сообщества...</div>';
+            
+            try {
+                const response = await fetch(`${API_BASE}/projects`);
+                if (!response.ok) throw new Error('HTTP ' + response.status);
+                
+                const communityProjects = await response.json();
+                console.log('Проекты сообщества:', communityProjects.length);
+                renderProjects(container, communityProjects, true); // true = проекты сообщества
+            } catch (error) {
+                console.error('Ошибка загрузки:', error);
+                container.innerHTML = '<div class="empty-state">❌ Ошибка загрузки проектов</div>';
+                showNotification('❌ Не удалось загрузить проекты сообщества', 'error');
+            }
+        }
+        
+   
+        async function createFeedback(projectId) {
+            const content = prompt('💬 Введите ваш фидбек:');
+            if (!content || !content.trim()) return;
+            
+            showNotification('⏳ Отправляю фидбек...');
+            
+            try {
+                const response = await fetch(`${API_BASE}/projects/${projectId}/feedbacks`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-Token': '<%= form_authenticity_token %>'
+                    },
+                    body: JSON.stringify({
+                        feedback: {
+                            content: content
+                        }
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showNotification('✅ Фидбек отправлен!');
+                    // Обновляем список проектов
+                    if (document.getElementById('community').classList.contains('active')) {
+                        loadCommunityProjects();
+                    } else {
+                        loadMyProjects();
+                    }
+                } else {
+                    showNotification(`❌ ${result.errors?.join(', ') || 'Ошибка'}`, 'error');
+                }
+            } catch (error) {
+                console.error('Ошибка отправки фидбека:', error);
+                showNotification('❌ Ошибка сети', 'error');
+            }
+        }
+        
+       
+        function renderProjects(container, projectsList, isCommunity = false) {
+            if (!projectsList || !projectsList.length) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div style="font-size: 48px; margin-bottom: 16px;">📁</div>
+                        <p>${isCommunity ? 'В сообществе пока нет проектов' : 'У вас пока нет проектов'}</p>
+                        <small>${isCommunity ? 'Будьте первым!' : 'Создайте первый проект!'}</small>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = projectsList.map(project => `
+                <div class="project-card">
+                    ${project.image_url ? `<img src="${project.image_url}" class="project-image" alt="${project.title}">` : ''}
+                    <div class="project-title">${project.title}</div>
+                    <div class="project-author">👤 @${project.user?.username || 'user'}</div>
+                    <div class="project-description">${project.description || 'Без описания'}</div>
+                    ${project.feedback_request ? `<div style="font-size: 14px; color: #666; margin-bottom: 8px;"><strong>💡 Запрос фидбека:</strong> ${project.feedback_request}</div>` : ''}
+                    <div class="project-meta">
+                        <span>🏷️ ${project.category}</span>
+                        <span class="feedback-count">💬 ${project.feedbacks?.length || 0}</span>
+                    </div>
+                    
+                    ${isCommunity ? `
+                        <button class="btn btn-feedback" onclick="createFeedback(${project.id})">
+                            💬 Оставить фидбек
+                        </button>
+                    ` : ''}
+                    
+                    ${renderFeedbacks(project.feedbacks)}
+                </div>
+            `).join('');
+        }
+        
+    
+        function renderFeedbacks(feedbacks) {
+            if (!feedbacks || !feedbacks.length) return '';
+            
+            return `
+                <div class="feedbacks-section">
+                    <div style="font-size: 14px; font-weight: 600; margin-bottom: 12px; color: #101010;">Фидбеки (${feedbacks.length}):</div>
+                    ${feedbacks.map(fb => `
+                        <div class="feedback-item">
+                            <div class="feedback-author">👤 @${fb.user?.username || 'user'}</div>
+                            <div class="feedback-content">${fb.content}</div>
+                            <div class="feedback-meta">
+                                <span>📅 ${formatDate(fb.created_at)}</span>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+        
+ 
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('ru-RU', {
+                day: 'numeric',
+                month: 'short',
+                year: 'numeric'
+            });
+        }
+        
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('🚀 RE:FORM Telegram Mini App');
+            initTelegram();
+            showNotification('👋 Добро пожаловать!');
+        });
+    </script>
+</body>
+</html>

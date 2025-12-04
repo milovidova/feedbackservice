@@ -1,0 +1,22 @@
+<h1>Галерея проектов</h1>
+
+<div class="projects-gallery">
+  <% if @projects.any? %>
+    <% @projects.each do |project| %>
+      <div class="project-thumbnail">
+        <%= link_to project_path(project) do %>
+          <% if project.image.present? %>
+            <%= image_tag project.image.url, alt: project.title %>
+          <% else %>
+            <div class="no-image">Нет изображения</div>
+          <% end %>
+          <div class="project-title-overlay">
+            <h3><%= project.title %></h3>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  <% else %>
+    <p>Пока нет проектов</p>
+  <% end %>
+</div>

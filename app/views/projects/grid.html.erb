@@ -1,0 +1,31 @@
+<h1>Проекты (сетка)</h1>
+
+<div class="projects-grid">
+  <% if @projects.any? %>
+    <% @projects.each do |project| %>
+      <div class="project-card">
+        <%= link_to project_path(project), class: "project-link" do %>
+          <% if project.image.present? %>
+            <div class="project-image">
+              <%= image_tag project.image.url, alt: project.title %>
+            </div>
+          <% end %>
+          
+          <div class="project-info">
+            <h3><%= project.title %></h3>
+            <p class="project-description"><%= truncate(project.description, length: 100) %></p>
+            <div class="project-meta">
+              <span class="category"><%= project.category %></span>
+              <span class="author">Автор: <%= project.user.username %></span>
+            </div>
+            <div class="feedback-count">
+              Фидбеков: <%= project.feedbacks.count %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  <% else %>
+    <p>Пока нет проектов</p>
+  <% end %>
+</div>

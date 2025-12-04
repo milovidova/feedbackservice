@@ -18,6 +18,22 @@ Rails.application.routes.draw do
   get "pages/about"      
   get "pages/profile"    
   get "pages/articles"
-  resources :projects
+ 
+
+get 'telegram/app', to: 'telegram#app'
+get 'telegram/projects', to: 'telegram#projects' 
+get 'telegram/my_projects', to: 'telegram#my_projects' 
+post 'telegram/create_project', to: 'telegram#create_project'
+post 'telegram/projects/:project_id/feedbacks', to: 'telegram#create_feedback'
+
+  # resources :projects
+  # post '/waitlist', to: 'waitlists#create'
+
+  get 'projects/grid', to: 'projects#grid', as: :grid_projects
+  
+
+    resources :projects do
+    resources :feedbacks, only: [:create]  
+  end
   post '/waitlist', to: 'waitlists#create'
 end
