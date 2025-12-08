@@ -1,61 +1,559 @@
+<style>
 
-<h1 style="font-family: 'Gilroy-Semibold'; font-weight: 400; font-size: 28px; color: #000; margin-left: 34px; margin-top: 46px">
-  Проекты
-</h1>
+  :root {
+    --mobile: 480px;
+    --tablet: 768px;
+    --desktop: 1024px;
+  }
 
 
-<div style="position: fixed; top: 110px; right: 35px; z-index: 1000; padding: 10px;">
-  <div style="display: flex; flex-direction: column; gap: 45px;">
-   <%= link_to 'Порядок', '/projects/grid', 
-                style: "padding-top: 12px; text-decoration: none; text-transform: uppercase; text-align: center; font-family: 'Gilroy'; font-size: 14px; font-weight: 400; border-radius: 20px; width: 140px; height: 27px; #{@view_mode == :grid ? 'background: #191919; color: white;' : 'background: #f8f9fa; color: #333; border: 0.80px solid #191919;'}" %>
+  .projects-title {
+    font-family: 'Gilroy-Semibold', sans-serif;
+    font-weight: 400;
+    font-size: 28px;
+    color: #000;
+    margin-left: 34px;
+    margin-top: 46px;
+  }
+
+ 
+  .view-mode-switcher {
+    position: fixed;
+    top: 110px;
+    right: 35px;
+    z-index: 1000;
+    padding: 10px;
+  }
+
+  .view-mode-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 45px;
+  }
+
+  .view-mode-btn {
+    padding-top: 12px;
+    text-decoration: none;
+    text-transform: uppercase;
+    text-align: center;
+    font-family: 'Gilroy', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 20px;
+    width: 140px;
+    height: 27px;
+    display: block;
+  }
+
+  .view-mode-btn.active {
+    background: #191919;
+    color: white;
+  }
+
+  .view-mode-btn.inactive {
+    background: #f8f9fa;
+    color: #333;
+    border: 0.80px solid #191919;
+  }
+
+
+  .chaos-container {
+    position: relative;
+    width: 100%;
+    min-height: 2500px;
+    margin-top: 50px;
+    background: transparent;
+  }
+
+  .chaos-project {
+    position: absolute;
+    cursor: move;
+    overflow: hidden;
+    transition: transform 0.2s ease;
+  }
+
+  .chaos-project:hover {
+    transform: scale(1.02) !important;
+    z-index: 10000 !important;
+  }
+
+  .project-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+  }
+
+  .project-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: transparent;
+  }
+
+  .project-placeholder {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    font-size: 14px;
+  }
+
+  /* Стили для режима сетки */
+  .grid-container {
+    width: 100%;
+    margin-top: 30px;
+    padding: 0;
+  }
+
+  .grid-row {
+    display: flex;
+    height: 553px;
+  }
+
+  .grid-row.bordered-top {
+    border-top: 1px solid #D9D9D9;
+  }
+
+  .grid-column {
+    height: 100%;
+    position: relative;
+  }
+
+  .grid-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .grid-category {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+  }
+
+  .category-label {
+    font-family: 'Gilroy', sans-serif;
+    font-size: 12px;
+    color: #000;
+    margin-bottom: 8px;
+  }
+
+  .category-value {
+    font-family: 'Gilroy', sans-serif;
+    font-size: 12px;
+    color: #000;
+  }
+
+  .grid-title {
+    position: absolute;
+    top: 98px;
+    left: 20px;
+    font-family: 'Gilroy', sans-serif;
+    font-size: 24px;
+    color: #000;
+    font-weight: 500;
+  }
+
+  .grid-image-container {
+    position: absolute;
+    top: 177px;
+    left: 20px;
+    width: calc(100% - 40px);
+    height: 273px;
+    overflow: hidden;
+  }
+
+  .grid-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .placeholder-image {
+    width: 100%;
+    height: 100%;
+    background: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    font-size: 14px;
+  }
+
+  .grid-footer {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Gilroy', sans-serif;
+    font-size: 12px;
+    color: #000;
+  }
+
+  .empty-grid-cell {
+    width: 100%;
+    height: 100%;
+    background: #fafafa;
+  }
+
+ 
+  .empty-projects {
+    text-align: center;
+    padding: 60px 20px;
+    color: #666;
+  }
+
+  .empty-projects h3 {
+    margin-bottom: 20px;
+  }
+
+  .empty-projects p {
+    margin-bottom: 30px;
+  }
+
+  .create-project-btn {
+    padding: 12px 30px;
+    border-radius: 6px;
+    text-decoration: none;
+    background: #28a745;
+    color: white;
+    display: inline-block;
+  }
+
+  .create-project-btn:hover {
+    background: #218838;
+  }
+
+
+  
+
+  @media (max-width: 1024px) {
+    .projects-title {
+      margin-left: 25px;
+      margin-top: 35px;
+      font-size: 24px;
+    }
+    
+    .view-mode-switcher {
+      top: 100px;
+      right: 25px;
+    }
+    
+    .view-mode-buttons {
+      gap: 35px;
+    }
+    
+    .view-mode-btn {
+      width: 130px;
+      font-size: 13px;
+    }
+    
+    .chaos-container {
+      min-height: 2000px;
+      margin-top: 40px;
+    }
+    
+    .grid-row {
+      height: 450px;
+    }
+    
+    .grid-title {
+      top: 80px;
+      font-size: 20px;
+    }
+    
+    .grid-image-container {
+      height: 200px;
+      top: 150px;
+    }
+    
+    .grid-category,
+    .grid-footer {
+      font-size: 11px;
+    }
+  }
+
+
+  @media (max-width: 768px) {
+    .projects-title {
+      margin-left: 20px;
+      margin-top: 30px;
+      font-size: 22px;
+    }
+    
+    .view-mode-switcher {
+      position: static;
+      display: flex;
+      justify-content: center;
+      padding: 15px;
+      background: transparent;
+      box-shadow: none;
+      margin-bottom: 10px;
+    }
+    .view-mode-buttons {
+      gap: 25px;
+    }
+    
+    .view-mode-btn {
+      width: 120px;
+      height: 25px;
+      padding-top: 10px;
+      font-size: 12px;
+    }
+    
+    .chaos-container {
+      min-height: 1500px;
+      margin-top: 30px;
+    }
+    
+    .grid-container {
+      margin-top: 20px;
+    }
+    
+    .grid-row {
+      height: 350px;
+      flex-wrap: wrap;
+    }
+    
+    .grid-column {
+      border-right: 1px solid #D9D9D9;
+      border-bottom: 1px solid #D9D9D9;
+    }
+    
+    .grid-category {
+      top: 15px;
+      left: 15px;
+    }
+    
+    .grid-title {
+      top: 70px;
+      left: 15px;
+      font-size: 18px;
+    }
+    
+    .grid-image-container {
+      top: 130px;
+      left: 15px;
+      width: calc(100% - 30px);
+      height: 150px;
+    }
+    
+    .grid-footer {
+      bottom: 15px;
+      left: 15px;
+      right: 15px;
+    }
+    
+    .empty-projects {
+      padding: 40px 15px;
+    }
+    
+    .create-project-btn {
+      padding: 10px 25px;
+      font-size: 14px;
+    }
+  }
+
+
+  @media (max-width: 480px) {
+    .projects-title {
+      margin: 20px 0;
+      text-align: center;
+      font-size: 20px;
+    }
+    
+    .view-mode-switcher {
+      position: static;
+      display: flex;
+      justify-content: center;
+      padding: 15px;
+      background: transparent;
+      box-shadow: none;
+      margin-bottom: 10px;
+    }
+    
+    .view-mode-buttons {
+      flex-direction: row;
+      gap: 15px;
+    }
+    
+    .view-mode-btn {
+      width: 110px;
+      height: 24px;
+      padding-top: 8px;
+      font-size: 11px;
+    }
+    
+    .chaos-container {
+      min-height: 1200px;
+      margin-top: 20px;
+    }
+    
+    .grid-row {
+      height: auto;
+      flex-direction: column;
+    }
+    
+    .grid-column {
+      width: 100% !important;
+      height: 280px;
+      border-right: none;
+      border-bottom: 1px solid #D9D9D9;
+    }
+    
+    .grid-column:last-child {
+      border-bottom: none;
+    }
+    
+    .grid-category {
+      top: 15px;
+      left: 15px;
+    }
+    
+    .category-label,
+    .category-value {
+      font-size: 10px;
+    }
+    
+    .grid-title {
+      top: 55px;
+      left: 15px;
+      font-size: 16px;
+    }
+    
+    .grid-image-container {
+      top: 95px;
+      left: 15px;
+      width: calc(100% - 30px);
+      height: 120px;
+    }
+    
+    .grid-footer {
+      font-size: 10px;
+    }
+    
+    .empty-projects h3 {
+      font-size: 18px;
+    }
+    
+    .empty-projects p {
+      font-size: 14px;
+    }
+    
+    .create-project-btn {
+      padding: 8px 20px;
+      font-size: 13px;
+    }
+  }
+
+
+  @media (max-width: 360px) {
+    .view-mode-btn {
+      width: 100px;
+      font-size: 10px;
+    }
+    
+    .grid-column {
+      height: 250px;
+    }
+    
+    .grid-title {
+      font-size: 15px;
+    }
+    
+    .grid-image-container {
+      height: 100px;
+    }
+  }
+
+
+  @media (max-height: 480px) and (orientation: landscape) {
+    .chaos-container {
+      min-height: 800px;
+    }
+    
+    .grid-row {
+      height: 200px;
+    }
+    
+    .grid-image-container {
+      height: 80px;
+      top: 100px;
+    }
+    
+    .grid-title {
+      top: 60px;
+    }
+  }
+</style>
+
+<h1 class="projects-title">Проекты</h1>
+
+<div class="view-mode-switcher">
+  <div class="view-mode-buttons">
+    <%= link_to 'Порядок', '/projects/grid', 
+                class: "view-mode-btn #{@view_mode == :grid ? 'active' : 'inactive'}" %>
     <%= link_to 'Хаос', projects_path, 
-                style: "padding-top: 12px; text-decoration: none; text-transform: uppercase; text-align: center; font-family: 'Gilroy'; font-size: 14px; font-weight: 400; border-radius: 20px; width: 140px; height: 27px; transform: rotate(38deg); #{@view_mode == :gallery ? 'background: #191919; color: white;' : 'background: #f8f9fa; color: #333; border: 0.80px solid #191919;'}" %>
+                class: "view-mode-btn #{@view_mode == :gallery ? 'active' : 'inactive'}",
+                style: "transform: rotate(38deg);" %>
   </div>
 </div>
-
 
 <% if @projects.any? %>
   <% if @view_mode == :gallery %>
 
     <% display_projects = @projects.first(20) %>
-    <div id="chaos-container" style="position: relative; width: 100%; min-height: 2500px; margin-top: 50px; background: transparent;">
+    <div id="chaos-container" class="chaos-container">
       <% 
-
         occupied_positions = []
         grid_size = 100 
       %>
       
       <% display_projects.each_with_index do |project, index| %>
         <% 
-        
-          min_width = 220
-          max_width = 380
-          min_height = 220
-          max_height = 350
+
+          is_mobile = false
+          if defined?(request) && request.user_agent
+            is_mobile = request.user_agent.match?(/iPhone|Android|Mobile/i)
+          end
+          
+
+          min_width = is_mobile ? 150 : 220
+          max_width = is_mobile ? 280 : 380
+          min_height = is_mobile ? 150 : 220
+          max_height = is_mobile ? 250 : 350
           
           random_width = rand(min_width..max_width)
           random_height = rand(min_height..max_height)
           
-
-          random_rotate = rand(-12..12)
+  
+          random_rotate = is_mobile ? rand(-5..5) : rand(-12..12)
           
-         
-          max_attempts = 100
+
+          max_attempts = is_mobile ? 50 : 100
           found_position = false
           random_x = 0
           random_y = 0
           
           max_attempts.times do |attempt|
-            
-            temp_x = rand(0..85) 
+
+            max_x_percent = is_mobile ? 70 : 85
+            temp_x = rand(0..max_x_percent) 
             temp_y = rand(0..2000) 
             
-       
+    
             collision = false
             cell_x = (temp_x / 10).floor
             cell_y = (temp_y / grid_size).floor
             
-       
             (cell_y-1..cell_y+1).each do |check_y|
               (cell_x-1..cell_x+1).each do |check_x|
                 if occupied_positions.include?([check_x, check_y])
@@ -71,7 +569,7 @@
               random_x = temp_x
               random_y = temp_y
               
- 
+  
               (cell_y-1..cell_y+1).each do |occupy_y|
                 (cell_x-1..cell_x+1).each do |occupy_x|
                   occupied_positions << [occupy_x, occupy_y]
@@ -81,43 +579,38 @@
             end
           end
           
-         
+
           unless found_position
-            random_x = rand(0..85)
+            max_x_percent = is_mobile ? 70 : 85
+            random_x = rand(0..max_x_percent)
             random_y = rand(occupied_positions.empty? ? 0 : occupied_positions.last[1] * grid_size + 200..occupied_positions.empty? ? 1000 : occupied_positions.last[1] * grid_size + 400)
           end
           
-
           random_z = index + 10
           
-         
-          small_offset_x = rand(-15..15)
+  
+          offset_range = is_mobile ? (5..10) : (-15..15)
+          small_offset_x = rand(offset_range)
           small_offset_y = rand(-10..10)
         %>
         
         <div class="chaos-project" 
              data-project-id="<%= project.id %>"
-             style="position: absolute; 
-                    left: calc(<%= random_x %>% + <%= small_offset_x %>px); 
+             style="left: calc(<%= random_x %>% + <%= small_offset_x %>px); 
                     top: <%= random_y + small_offset_y %>px; 
                     width: <%= random_width %>px; 
                     height: <%= random_height %>px; 
                     transform: rotate(<%= random_rotate %>deg); 
-                    z-index: <%= random_z %>; 
-                    cursor: move;
-                    overflow: hidden;">
+                    z-index: <%= random_z %>;">
           
-   
           <a href="<%= project_path(project) %>" 
-             class="project-link"
-             style="display: block; width: 100%; height: 100%; text-decoration: none;">
+             class="project-link">
             <% if project.image.present? %>
               <%= image_tag project.image.url, 
-                    style: "width: 100%; height: 100%; object-fit: contain; background: transparent;",
-                    alt: "",
-                    class: "project-image" %>
+                    class: "project-image",
+                    alt: project.title %>
             <% else %>
-              <div style="width: 100%; height: 100%; background: transparent; display: flex; align-items: center; justify-content: center; color: #999; font-size: 14px;">
+              <div class="project-placeholder">
                 📷
               </div>
             <% end %>
@@ -128,17 +621,38 @@
     
   <% else %>
   
-    <div style="width: 100%; margin-top: 30px; padding: 0;">
+    <div class="grid-container">
       <% 
-      
-        row_patterns = [
-   
-          { columns: [288, 288, 288, 576], count: 4 },
 
-          { columns: [576, 576, 288], count: 3 }
-        ]
+        row_patterns = []
         
-        row_height = 553
+
+        is_mobile = false
+        is_tablet = false
+        
+        if defined?(request) && request.user_agent
+          user_agent = request.user_agent.downcase
+          is_mobile = user_agent.match?(/iphone|android|mobile/)
+          is_tablet = user_agent.match?(/ipad|tablet/) || (!is_mobile && user_agent.match?(/android/))
+        end
+        
+        if is_mobile
+          row_patterns = [{ columns: [768], count: 1 }]
+          row_height = 280
+        elsif is_tablet
+          row_patterns = [
+            { columns: [384, 384], count: 2 },
+            { columns: [384, 384], count: 2 }
+          ]
+          row_height = 350
+        else
+          row_patterns = [
+            { columns: [288, 288, 288, 576], count: 4 },
+            { columns: [576, 576, 288], count: 3 }
+          ]
+          row_height = 553
+        end
+        
         projects_per_page = 20
         displayed_projects = @projects.first(projects_per_page)
         project_index = 0
@@ -147,63 +661,54 @@
       
       <% while project_index < displayed_projects.length %>
         <% 
-    
-          pattern = row_patterns[row_index % 2]
+          pattern = row_patterns[row_index % row_patterns.length]
           columns = pattern[:columns]
           row_projects = displayed_projects[project_index, columns.length] || []
         %>
         
-    
-        <div style="display: flex; height: <%= row_height %>px; <%= row_index > 0 ? 'border-top: 1px solid #D9D9D9;' : '' %>">
+        <div class="grid-row <%= row_index > 0 ? 'bordered-top' : '' %>">
           <% columns.each_with_index do |column_width, col_index| %>
             <% 
               project = row_projects[col_index]
-              # Для последней колонки в ряду убираем правую границу
-              border_right = col_index < columns.length - 1 ? 'border-right: 1px solid #D9D9D9;' : ''
+              # Для десктопа добавляем правую границу
+              border_right = ""
+              if !is_mobile && !is_tablet && col_index < columns.length - 1
+                border_right = "border-right: 1px solid #D9D9D9;"
+              end
             %>
             
-            <div style="width: <%= column_width %>px; height: 100%; position: relative; <%= border_right %>">
+            <div class="grid-column" style="width: <%= column_width %>px; <%= border_right %>">
               <% if project %>
-                <%= link_to project_path(project), style: "display: block; width: 100%; height: 100%; text-decoration: none; color: inherit;" do %>
+                <%= link_to project_path(project), class: "grid-link" do %>
                   
-              
-                  <div style="position: absolute; top: 20px; left: 20px;">
-                    <div style="font-family: 'Gilroy'; font-size: 12px; color: #000; margin-bottom: 8px;">
-                      Категория
-                    </div>
-                    <div style="font-family: 'Gilroy'; font-size: 12px; color: #000;">
-                      <%= project.category %>
-                    </div>
+                  <div class="grid-category">
+                    <div class="category-label">Категория</div>
+                    <div class="category-value"><%= project.category %></div>
                   </div>
                   
-               
-                  <div style="position: absolute; top: 98px; left: 20px; font-family: 'Gilroy'; font-size: 24px; color: #000; font-weight: 500;">
+                  <div class="grid-title">
                     <%= project.title.split.first %>
                   </div>
                   
-             
-                  <div style="position: absolute; top: 177px; left: 20px; width: <%= column_width - 40 %>px; height: 273px; overflow: hidden;">
+                  <div class="grid-image-container">
                     <% if project.image.present? %>
                       <%= image_tag project.image.url, 
-                            style: "width: 100%; height: 100%; object-fit: cover;",
                             alt: project.title %>
                     <% else %>
-                      <div style="width: 100%; height: 100%; background: #f5f5f5; display: flex; align-items: center; justify-content: center; color: #999; font-size: 14px;">
+                      <div class="placeholder-image">
                         📷
                       </div>
                     <% end %>
                   </div>
                   
-           
-                  <div style="position: absolute; bottom: 20px; left: 20px; right: 20px; display: flex; justify-content: space-between; font-family: 'Gilroy'; font-size: 12px; color: #000;">
+                  <div class="grid-footer">
                     <span>Автор</span>
                     <span><%= project.user.username %></span>
                   </div>
                   
                 <% end %>
               <% else %>
-          
-                <div style="width: 100%; height: 100%; background: #fafafa;"></div>
+                <div class="empty-grid-cell"></div>
               <% end %>
             </div>
           <% end %>
@@ -219,19 +724,20 @@
   
 <% else %>
 
-  <div style="text-align: center; padding: 60px 20px; color: #666;">
-    <h3 style="margin-bottom: 20px;">Пока нет проектов</h3>
-    <p style="margin-bottom: 30px;">Будьте первым, кто добавит проект!</p>
+  <div class="empty-projects">
+    <h3>Пока нет проектов</h3>
+    <p>Будьте первым, кто добавит проект!</p>
     <%= link_to '➕ Создать проект', new_project_path, 
-                style: "padding: 12px 30px; border-radius: 6px; text-decoration: none; background: #28a745; color: white; display: inline-block;" %>
+                class: "create-project-btn" %>
   </div>
 <% end %>
 
-<%# Вставьте этот исправленный JavaScript вместо старого %>
-
-
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints;
+  
   let isDragging = false;
   let currentProject = null;
   let startX = 0;
@@ -239,20 +745,27 @@ document.addEventListener('DOMContentLoaded', function() {
   let initialLeft = 0;
   let initialTop = 0;
   
-  
   const projects = document.querySelectorAll('.chaos-project');
+  const container = document.getElementById('chaos-container');
   
-  projects.forEach(project => {
 
-    project.addEventListener('mousedown', startDrag);
-  });
+  if (isMobile) {
+    projects.forEach(project => {
+      project.style.cursor = 'default';
+    });
+  }
   
+
   function startDrag(e) {
 
-    if (e.target.tagName === 'A' || e.target.closest('a')) {
+    if (isMobile && isTouchDevice) {
+     
+      return;
+    }
+    
 
+    if (e.target.tagName === 'A' || e.target.closest('a')) {
       const clickTimer = setTimeout(() => {
-   
         if (!isDragging) {
           return;
         }
@@ -267,20 +780,23 @@ document.addEventListener('DOMContentLoaded', function() {
       e.preventDefault();
     }
     
-  
-    startX = e.clientX;
-    startY = e.clientY;
+
+    const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+    const clientY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
     
+    startX = clientX;
+    startY = clientY;
     
+
     const style = window.getComputedStyle(this);
     initialLeft = parseFloat(style.left) || 0;
     initialTop = parseFloat(style.top) || 0;
     
-
+  
     this.style.zIndex = 9999;
     this.style.cursor = 'grabbing';
     
-
+ 
     currentProject = this;
     isDragging = true;
     
@@ -291,30 +807,36 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
 
-    document.addEventListener('mousemove', drag);
-    document.addEventListener('mouseup', stopDrag);
+    if (e.type.includes('touch')) {
+      document.addEventListener('touchmove', drag);
+      document.addEventListener('touchend', stopDrag);
+    } else {
+      document.addEventListener('mousemove', drag);
+      document.addEventListener('mouseup', stopDrag);
+    }
     
     e.stopPropagation();
   }
   
+
   function drag(e) {
     if (!isDragging || !currentProject) return;
     
 
-    const deltaX = e.clientX - startX;
-    const deltaY = e.clientY - startY;
+    const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+    const clientY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
     
-
+    const deltaX = clientX - startX;
+    const deltaY = clientY - startY;
+    
     let newLeft = initialLeft + deltaX;
     let newTop = initialTop + deltaY;
     
 
-    const container = document.getElementById('chaos-container');
     const containerWidth = container.offsetWidth;
     const containerHeight = container.offsetHeight;
     const projectWidth = currentProject.offsetWidth;
     const projectHeight = currentProject.offsetHeight;
-    
     
     newLeft = Math.max(-50, Math.min(newLeft, containerWidth - projectWidth + 50));
     newTop = Math.max(-50, Math.min(newTop, containerHeight - projectHeight + 50));
@@ -322,24 +844,29 @@ document.addEventListener('DOMContentLoaded', function() {
 
     currentProject.style.left = newLeft + 'px';
     currentProject.style.top = newTop + 'px';
+    
+
+    if (e.type.includes('touch')) {
+      e.preventDefault();
+    }
   }
   
+
   function stopDrag(e) {
     if (!isDragging || !currentProject) return;
     
 
     const link = currentProject.querySelector('a');
     if (link) {
-     
       setTimeout(() => {
         link.style.pointerEvents = 'auto';
       }, 100);
     }
     
-  
+   
     currentProject.style.cursor = 'move';
     
-
+   
     setTimeout(() => {
       if (currentProject) {
         const projectIndex = Array.from(projects).indexOf(currentProject);
@@ -347,20 +874,39 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }, 100);
     
-   
-    document.removeEventListener('mousemove', drag);
-    document.removeEventListener('mouseup', stopDrag);
+
+    if (e.type.includes('touch')) {
+      document.removeEventListener('touchmove', drag);
+      document.removeEventListener('touchend', stopDrag);
+    } else {
+      document.removeEventListener('mousemove', drag);
+      document.removeEventListener('mouseup', stopDrag);
+    }
     
 
-    isDragging = false;
-    currentProject = null;
+    const clientX = e.type.includes('touch') ? e.changedTouches[0].clientX : e.clientX;
+    const clientY = e.type.includes('touch') ? e.changedTouches[0].clientY : e.clientY;
     
-    
-    if (Math.abs(e.clientX - startX) > 5 || Math.abs(e.clientY - startY) > 5) {
+    if (Math.abs(clientX - startX) > 5 || Math.abs(clientY - startY) > 5) {
       e.preventDefault();
       e.stopPropagation();
     }
+    
+  
+    isDragging = false;
+    currentProject = null;
   }
+  
+
+  projects.forEach(project => {
+    if (isTouchDevice) {
+    
+      project.addEventListener('touchstart', startDrag, { passive: false });
+    } else {
+   
+      project.addEventListener('mousedown', startDrag);
+    }
+  });
   
 
   document.addEventListener('selectstart', function(e) {
@@ -370,10 +916,37 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   
 
-  projects.forEach(project => {
-    project.addEventListener('contextmenu', function(e) {
-      e.preventDefault();
-    });
+  let resizeTimer;
+  window.addEventListener('resize', function() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function() {
+     
+      if (isDragging && currentProject) {
+        stopDrag(new Event('resize'));
+      }
+    }, 250);
   });
+  
+
+  if (isMobile) {
+    let touchStartX = 0;
+    let touchStartY = 0;
+    
+    document.addEventListener('touchstart', function(e) {
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+    
+    document.addEventListener('touchmove', function(e) {
+
+      const touchY = e.touches[0].clientY;
+      const deltaY = touchStartY - touchY;
+      
+      if (Math.abs(deltaY) > 50) {
+        window.scrollBy(0, deltaY * 0.5);
+        touchStartY = touchY;
+      }
+    }, { passive: true });
+  }
 });
 </script>

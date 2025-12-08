@@ -21,24 +21,507 @@
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
 
+    <style>
+      
+      .menu {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 22px;
+      }
+      
+      .eye {
+        margin-left: 34px; /* Оригинальный отступ */
+        cursor: pointer;
+      }
+      
+      .search {
+        margin-right: 34px; /* Оригинальный отступ */
+        cursor: pointer;
+      }
+      
+      .main-nav {
+        display: flex;
+        gap: 44px;
+        font-family: 'Gilroy';
+        margin-left: 400px; /* Оригинальный отступ */
+        font-weight: 400;
+        font-size: 18px;
+        color: #000;
+        align-items: center;
+      }
+      
+      .nav-link {
+        color: inherit;
+        text-decoration: none;
+        padding: 5px 0;
+        font-family: 'Gilroy';
+      }
+      
+      body {
+        background-color: #fbfbfb;
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+      }
+      
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      
+      
+      .hamburger {
+        display: none;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 30px;
+        height: 21px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        z-index: 1001;
+        order: 2;
+      }
+      
+      .hamburger span {
+        display: block;
+        height: 3px;
+        width: 100%;
+        background: #000;
+        border-radius: 3px;
+        transition: all 0.3s ease;
+      }
+      
+      .hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(6px, 6px);
+      }
+      
+      .hamburger.active span:nth-child(2) {
+        opacity: 0;
+      }
+      
+      .hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(6px, -6px);
+      }
+      
+ 
+      .mobile-nav {
+        display: none;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 280px;
+        height: 100vh;
+        background: #fbfbfb;
+        box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+        padding: 80px 30px 30px;
+        transition: right 0.4s ease;
+        z-index: 999;
+        flex-direction: column;
+        gap: 25px;
+      }
+      
+      .mobile-nav.active {
+        right: 0;
+      }
+      
+      .mobile-nav .nav-link {
+        padding: 12px 0;
+        color: #000;
+        text-decoration: none;
+        font-family: 'Gilroy';
+        font-size: 20px;
+        background: none;
+        border: none;
+        text-align: left;
+        cursor: pointer;
+        display: block;
+        width: 100%;
+        border-bottom: 1px solid #eee;
+      }
+      
+      .menu-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+        z-index: 998;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+      
+      .menu-overlay.active {
+        display: block;
+        opacity: 1;
+      }
+      
+
+      
+
+      @media (max-width: 1200px) {
+        .main-nav {
+          margin-left: 200px;
+          gap: 35px;
+        }
+        
+        .eye {
+          margin-left: 25px;
+        }
+        
+        .search {
+          margin-right: 25px;
+        }
+      }
+      
+  
+      @media (max-width: 992px) {
+        .main-nav {
+          margin-left: 100px;
+          gap: 30px;
+          font-size: 16px;
+        }
+        
+        .eye {
+          margin-left: 20px;
+        }
+        
+        .search {
+          margin-right: 20px;
+        }
+      }
+      
+   
+      @media (max-width: 768px) {
+        .main-nav {
+          margin-left: 50px;
+          gap: 25px;
+        }
+        
+        .nav-link {
+          font-size: 16px;
+        }
+        
+        .eye {
+          margin-left: 15px;
+        }
+        
+        .search {
+          margin-right: 15px;
+        }
+      }
+      
+   
+      @media (max-width: 576px) {
+        .main-nav {
+          display: none; 
+        }
+        
+        .search {
+          display: none; 
+        }
+        
+        .hamburger {
+          display: flex; 
+          margin-right: 34px; 
+        }
+        
+        .mobile-nav {
+          display: flex; 
+        }
+        
+        .eye {
+          margin-left: 34px; 
+        }
+      }
+      
+
+      @media (max-width: 360px) {
+        .mobile-nav {
+          width: 100%;
+          padding: 70px 20px 20px;
+        }
+        
+        .mobile-nav .nav-link {
+          font-size: 18px;
+        }
+        
+        .hamburger {
+          width: 25px;
+          height: 18px;
+          margin-right: 20px;
+        }
+        
+        .hamburger span {
+          height: 2px;
+        }
+        
+        .eye {
+          margin-left: 20px;
+        }
+      }
+      
+
+      @media (max-height: 500px) and (orientation: landscape) {
+        .mobile-nav {
+          padding-top: 60px;
+          gap: 15px;
+          overflow-y: auto;
+        }
+        
+        .mobile-nav .nav-link {
+          padding: 8px 0;
+          font-size: 16px;
+        }
+      }
+      
+ 
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateX(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+      
+      .mobile-nav .nav-link {
+        animation: slideIn 0.3s ease forwards;
+        opacity: 0;
+      }
+      
+      .mobile-nav .nav-link:nth-child(1) { animation-delay: 0.1s; }
+      .mobile-nav .nav-link:nth-child(2) { animation-delay: 0.2s; }
+      .mobile-nav .nav-link:nth-child(3) { animation-delay: 0.3s; }
+      .mobile-nav .nav-link:nth-child(4) { animation-delay: 0.4s; }
+      
+   
+      .nav-link.active {
+        font-weight: 600;
+      }
+      
+     
+      .nav-link:hover,
+      .nav-link:active,
+      .nav-link:focus {
+        text-decoration: none;
+        color: inherit;
+        background: none;
+        transform: none;
+        box-shadow: none;
+        outline: none;
+      }
+    </style>
   </head>
 
   <body>
+    <div class="menu">
+      <%= image_tag "vectoreye.svg", class: "eye", alt: "Логотип" %>
+      
+ 
+      <button class="hamburger" id="hamburger" aria-label="Открыть меню">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      
 
-  <div class="menu">
-<%= image_tag "vectoreye.svg", class: "eye" %>
-
-<nav class="main-nav">
-  <%= link_to "Проекты", root_path, class: "nav-link" %>
-  <%= link_to "О нас", pages_about_path, class: "nav-link" %>
-  <%= link_to "Профиль", pages_profile_path, class: "nav-link" %>
-  <%= link_to "Создать проект", new_project_path, class: "nav-button" %>
-</nav>
-
-<%= image_tag "vectorsearch.svg", class: "search" %>
-</div>
+      <nav class="main-nav">
+        <%= link_to "Проекты", root_path, 
+            class: "nav-link #{current_page?(root_path) ? 'active' : ''}" %>
+        <%= link_to "О нас", pages_about_path, 
+            class: "nav-link #{current_page?(pages_about_path) ? 'active' : ''}" %>
+        <%= link_to "Профиль", pages_profile_path, 
+            class: "nav-link #{current_page?(pages_profile_path) ? 'active' : ''}" %>
+        <%= link_to "Создать проект", new_project_path, 
+            class: "nav-link #{current_page?(new_project_path) ? 'active' : ''}" %>
+      </nav>
+      
+     
+      <%= image_tag "vectorsearch.svg", class: "search", alt: "Поиск" %>
+      
+    
+      <div class="menu-overlay" id="menuOverlay"></div>
+      <nav class="mobile-nav" id="mobileNav">
+        <%= link_to "Проекты", root_path, 
+            class: "nav-link #{current_page?(root_path) ? 'active' : ''}" %>
+        <%= link_to "О нас", pages_about_path, 
+            class: "nav-link #{current_page?(pages_about_path) ? 'active' : ''}" %>
+        <%= link_to "Профиль", pages_profile_path, 
+            class: "nav-link #{current_page?(pages_profile_path) ? 'active' : ''}" %>
+        <%= link_to "Создать проект", new_project_path, 
+            class: "nav-link #{current_page?(new_project_path) ? 'active' : ''}" %>
+      </nav>
+    </div>
+    
     <%= yield %>
+    
+    <script>
+
+      document.addEventListener('DOMContentLoaded', function() {
+        const hamburger = document.getElementById('hamburger');
+        const mobileNav = document.getElementById('mobileNav');
+        const menuOverlay = document.getElementById('menuOverlay');
+        
+
+        function toggleMenu() {
+          hamburger.classList.toggle('active');
+          mobileNav.classList.toggle('active');
+          menuOverlay.classList.toggle('active');
+          document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
+        }
+        
+
+        hamburger.addEventListener('click', toggleMenu);
+        
+    
+        menuOverlay.addEventListener('click', toggleMenu);
+        
+
+        const mobileLinks = mobileNav.querySelectorAll('.nav-link');
+        mobileLinks.forEach(link => {
+          link.addEventListener('click', function(e) {
+           
+            e.preventDefault();
+            
+
+            const url = this.getAttribute('href');
+            
+      
+            setTimeout(() => {
+              toggleMenu();
+   
+              if (url) {
+                window.location.href = url;
+              }
+            }, 300);
+          });
+        });
+        
+
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape' && mobileNav.classList.contains('active')) {
+            toggleMenu();
+          }
+        });
+        
+ 
+        window.addEventListener('orientationchange', function() {
+          if (mobileNav.classList.contains('active')) {
+            toggleMenu();
+          }
+        });
+        
+
+        let resizeTimer;
+        window.addEventListener('resize', function() {
+          clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(function() {
+
+            if (window.innerWidth > 576 && mobileNav.classList.contains('active')) {
+              toggleMenu();
+            }
+          }, 250);
+        });
+        
+
+        const eyeIcon = document.querySelector('.eye');
+        
+        if (eyeIcon) {
+          eyeIcon.addEventListener('click', function() {
+            window.location.href = '/';
+          });
+        }
+        
+
+        const searchIcon = document.querySelector('.search');
+        
+        if (searchIcon) {
+          searchIcon.addEventListener('click', function() {
+
+            if (window.innerWidth > 576) {
+
+              const searchContainer = document.createElement('div');
+              searchContainer.style.position = 'absolute';
+              searchContainer.style.right = '70px';
+              searchContainer.style.top = '15px';
+              searchContainer.style.display = 'flex';
+              searchContainer.style.alignItems = 'center';
+              searchContainer.style.gap = '10px';
+              searchContainer.style.zIndex = '1002';
+              
+              const searchInput = document.createElement('input');
+              searchInput.type = 'text';
+              searchInput.placeholder = 'Поиск проектов...';
+              searchInput.style.padding = '8px 12px';
+              searchInput.style.border = '1px solid #ccc';
+              searchInput.style.borderRadius = '4px';
+              searchInput.style.fontFamily = "'Gilroy', sans-serif";
+              searchInput.style.fontSize = '14px';
+              searchInput.style.width = '200px';
+              
+              const closeButton = document.createElement('button');
+              closeButton.innerHTML = '×';
+              closeButton.style.background = 'none';
+              closeButton.style.border = 'none';
+              closeButton.style.fontSize = '20px';
+              closeButton.style.cursor = 'pointer';
+              closeButton.style.color = '#000';
+              
+              searchContainer.appendChild(searchInput);
+              searchContainer.appendChild(closeButton);
+              document.querySelector('.menu').appendChild(searchContainer);
+              
+              searchInput.focus();
+              
+              
+              function closeSearch() {
+                searchContainer.remove();
+                searchIcon.style.display = 'block';
+              }
+              
+              closeButton.addEventListener('click', closeSearch);
+              
+      
+              document.addEventListener('click', function closeOnClickOutside(e) {
+                if (!searchContainer.contains(e.target) && e.target !== searchIcon) {
+                  closeSearch();
+                  document.removeEventListener('click', closeOnClickOutside);
+                }
+              });
+              
+
+              searchIcon.style.display = 'none';
+            }
+          });
+        }
+        
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+          anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (href !== '#' && href.startsWith('#')) {
+              e.preventDefault();
+              const target = document.querySelector(href);
+              if (target) {
+                target.scrollIntoView({
+                  behavior: 'smooth',
+                  block: 'start'
+                });
+              }
+            }
+          });
+        });
+      });
+    </script>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/interact.js/1.10.11/interact.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
   </body>
 </html>
