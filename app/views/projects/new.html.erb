@@ -1,33 +1,409 @@
-<h1>Создать проект</h1>
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .author {
+      width: 55px;
+      height: 55px;
+      margin-left: 12px;
+      margin-top: 58px
+    }
+    .profile {
+      font-family: 'Gilroy-Semibold';
+      font-weight: 400;
+      font-size: 24px;
+      color: #000;
+      margin-left: 37px;
+      margin-top: 68px
+    }
+    .upper {
+      display: flex;
+      
+    }
+    .line {
+      margin-left: 12px;
+      margin-top: 0px
+    }
+    .close {
+      margin-left: 226px;
+      margin-top: -717px
+    }
+    .firstsection {
+      background: #f4f3f1;
+      width: 464px;
+      height: 882px;
+      margin-top: -100px
+    }
+    .secondmini {
+      display: flex;
+      flex-direction: column;
+      margin-top: -478px;
+      gap: 24px
+    }
+    .firstmenu {
+      width: 17px;
+      height: 17px;
+      margin-left: 2px
+    }
+    .secondmenu {
+      width: 42px;
+      height: 42px;
+      margin-left: -12px
+    
+    }
+    .thirdmenu {
+      width: 20px;
+      height: 20px;
+    }
+    .secondmini2 {
+      margin-top: -430px
+      
+    
+    }
+.search2 {
+  margin-left: 88px
 
-<%= form_with model: @project, local: true do |form| %>
-  <div>
-    <%= form.label :title, "Название проекта" %>
-    <%= form.text_field :title, size: 50 %>
+}
+ .whitebox {
+  border-radius: 10px;
+width: 308px;
+height: 292px;
+background: #fbfbfb;
+margin-left: 88px;
+margin-top: -22px;
+
+
+ }
+.circle {
+  margin-left: 17px
+}
+.message {
+  margin-left: 100px
+}
+.twoicon {
+  margin-top: 0
+}
+.whitebox {
+  padding-top: 30px;
+}
+
+.twoicon {
+  display: flex;
+  justify-content: flex-start; 
+  gap: 117px;
+  margin-top: -15px; 
+
+}
+.feed {
+    font-family: 'Gilroy-Semibold';
+font-weight: 400;
+font-size: 12px;
+color: #bdb9b5;
+ margin-left: 17px;
+   margin-top: 38px; 
+}
+.feed2 {
+    font-family: 'Gilroy-Semibold';
+font-weight: 400;
+font-size: 19px;
+color: #000;
+margin-left: 17px;
+   margin-top: -10px; 
+}
+    .author2 {
+      width: 25px;
+      height: 25px;
+ 
+    }
+    .designer {
+       font-family: 'Gilroy-Semibold';
+font-weight: 400;
+font-size: 12px;
+color: #000;
+margin-left: 150px;
+ margin-top: 80px; 
+    }
+    .threeim {
+       width: 286px;
+      height: 160px; 
+      border-radius: 16px;
+      clip-path: inset(3px 0 0 0);
+      margin-top: 258px;
+      margin-left: 76px
+    }
+    .projects {
+         margin-top: -430px;
+         margin-left: 23px
+    }
+    .name1 {
+       font-family: 'Gilroy-Semibold';
+font-weight: 400;
+font-size: 12px;
+color: #000;
+margin-left: 16px
+    }
+    .res1 {
+       font-family: 'Gilroy';
+font-weight: 400;
+font-size: 12px;
+color: #000;
+    }
+    .info1 {
+      display: flex;
+      gap: 180px
+    }
+    .info {
+      border-radius: 10px;
+width: 308px;
+height: 229px;
+background: #f7f7f5;
+margin-top: -22px;
+    margin-left: 88px
+    }
+.feeed {
+    font-family: 'Gilroy-Semibold';
+font-weight: 400;
+font-size: 12px;
+color: #bdb9b5;
+ margin-left: 17px;
+   padding-top: 40px; 
+}
+.feeed2 {
+    font-family: 'Gilroy-Semibold';
+font-weight: 400;
+font-size: 19px;
+color: #000;
+margin-left: 17px;
+   margin-top: -11px; 
+  
+}
+.info1 {
+  margin-top: 28px
+}
+.info2 {
+    display: flex;
+      gap: 114px;
+  margin-top: -14px
+}
+.info3 {
+    display: flex;
+      gap: 155px;
+  margin-top: -14px
+}
+.info4 {
+    display: flex;
+      gap: 158px;
+  margin-top: -14px
+}
+.bigsection {
+  display: flex
+}
+.onl {
+  font-family: 'Gilroy-Medium';
+font-weight: 400;
+font-size: 24px;
+color: #bdb9b5;
+}
+.status {
+    font-family: 'Gilroy-Medium';
+font-weight: 400;
+font-size: 24px;
+color: #bdb9b5;
+}
+.twowor {
+  display: flex;
+  gap: 37px;
+  margin-left: 35px;
+  margin-top: 44px
+}
+.statustext {
+  font-family: 'Gilroy';
+font-weight: 400;
+font-size: 13px;
+line-height: 114%;
+color: #000;
+margin-left: 1px
+}
+.des {
+    font-family: 'Gilroy-Semibold';
+font-weight: 400;
+font-size: 130px;
+line-height: 83%;
+color: #000;
+margin-top: 30px;
+margin-left: 160px
+}
+.cat1 {
+   font-family: 'Gilroy-Medium';
+font-weight: 400;
+font-size: 16px;
+color: #000;
+border-radius: 3px;
+width: 110px;
+height: 39px;
+background: #fff;
+display: flex;
+  align-items: center; 
+  justify-content: center; 
+}
+.cat2 {
+   font-family: 'Gilroy-Medium';
+font-weight: 400;
+font-size: 16px;
+color: #000;
+border-radius: 3px;
+width: 132px;
+height: 39px;
+background: #f4f3f1;
+display: flex;
+  align-items: center; 
+  justify-content: center; 
+}
+.cat3 {
+   font-family: 'Gilroy-Medium';
+font-weight: 400;
+font-size: 16px;
+color: #000;
+border-radius: 3px;
+width: 87px;
+height: 39px;
+background: #f4f3f1;
+display: flex;
+  align-items: center; 
+  justify-content: center; 
+}
+.cat4 {
+   font-family: 'Gilroy-Medium';
+font-weight: 400;
+font-size: 16px;
+color: #000;
+border-radius: 3px;
+width: 143px;
+height: 39px;
+background: #f4f3f1;
+display: flex;
+  align-items: center; 
+  justify-content: center; 
+}
+.categ {
+  display: flex;
+  margin-top: -25px;
+  gap: 6px;
+  margin-left: 36px
+}
+.imfirst {
+  width: 280px;
+  height: 280px
+}
+.im3 {
+  display: flex;
+  gap: 44px;
+  margin-left: -932px;
+  margin-top: 400px
+  
+}
+.pos {
+  font-family: 'Gilroy';
+font-weight: 400;
+font-size: 12px;
+
+color: #000;
+margin-left: 120px;
+margin-top: 20px
+}
+.twostatus {
+  margin-left: 8px
+}
+.statustext {
+  margin-top: 26px
+}
+
+  </style>
+</head>
+<body>
+  <div class="bigsection">
+    <div class="firstsection">
+      <div class="upper">
+        <%= image_tag "author.png", class: "author" %>
+        <%= image_tag "line.svg", class: "line" %>
+        <p class='profile'>Profile</p>
+        <%= image_tag "close.svg", class: "close" %>
+      </div>
+ <div class="second"> 
+  <div class="secondmini"> 
+   <%= image_tag "firstmenu.svg", class: "firstmenu" %>
+   <%= image_tag "portfolio.svg", class: "secondmenu" %> 
+   <%= image_tag "thirdmenu.svg", class: "thirdmenu" %>
+ </div>
+  <div class="secondmini2"> 
+ <%= image_tag "search.svg", class: "search2" %>
+   <div class="whitebox"> 
+ <div class="twoicon">  
+ <%= image_tag "circle.svg", class: "circle" %>
+ <%= image_tag "message.svg", class: "message" %>
   </div>
+    <p class='feed'>Фидбеки</p>
+    <p class='feed2'>Оставленные фидбеки</p>
+ </div>
+  <div class="projects">  
 
-  <div>
-    <%= form.label :description, "Описание" %>
-    <%= form.text_area :description, rows: 4, cols: 50 %>
+              <%= image_tag "postblock.png", class: "threeim" %>
   </div>
-
-  <div>
-    <%= form.label :category, "Категория" %>
-    <%= form.select :category, ['UI/UX дизайн', 'Графический дизайн', 'Продуктовый дизайн', 'Веб дизайн', 'Мобильный дизайн', 'Брендинг'] %>
+   <div class="info">  
+      <p class='feeed'>Profile</p>
+      <p class='feeed2'>Основная информация</p>
+      <div class="info1">  
+      <p class='name1'>Имя</p>
+      <p class='res1'>Designer</p>
+   </div>
+         <div class="info2">  
+      <p class='name1'>Специальность</p>
+      <p class='res1'>Ui/Ux</p>
+   </div>
+         <div class="info3">  
+      <p class='name1'>Уровень</p>
+      <p class='res1'>Новичок</p>
+   </div>
+          <div class="info4">  
+      <p class='name1'>Рейтинг</p>
+        <%= image_tag "star.svg", class: "star" %>
+   </div>
+   </div>
+ </div>
+ </div>
+    </div>
+    <div class="secondsection">
+      <div class="twowor">
+          <p class='onl'>Online</p>
+           <div class="twostatus">
+          <p class='status'>Статус</p>
+          <p class='statustext'>Проекты: 7 <br>
+Фидбеки: 10 <br>
+Мои фидбеки: 11</p>
+    </div>
+      <p class='des'>Designer</p>
+        </div>
+         <div class="categ">
+           <p class='cat1'>Брендинг</p>
+                 <p class='cat2'>Приложения</p>
+                       <p class='cat3'>Сайты</p>
+                             <p class='cat4'>Иллюстрации</p>
+    </div>
+    </div>
+      <div class="im3">
+          <div class="im1">
+            <%= image_tag "imfirst.png", class: "imfirst" %>  
+              <p class='pos'>Постер</p>
+            </div>
+            <div class="im1">
+               <%= image_tag "imsec.png", class: "imfirst" %>
+              <p class='pos'>Постер</p>
+            </div>
+               <div class="im1">
+               <%= image_tag "imthird.png", class: "imfirst" %>
+              <p class='pos'>Постер</p>
+            </div>
+                   
   </div>
-
-  <div>
-    <%= form.label :feedback_request, "Запрос фидбека" %>
-    <%= form.text_area :feedback_request, rows: 3, cols: 50, placeholder: "На что хочешь получить фидбек?" %>
-  </div>
-
-  <div>
-    <%= form.label :image, "Картинка проекта" %>
-    <%= form.file_field :image %>
-  </div>
-
-  <%= form.submit "Создать проект" %>
-<% end %>
-
-<%= link_to "Назад к проектам", projects_path %>
-
+</body>
+</html>

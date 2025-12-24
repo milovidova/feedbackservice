@@ -668,3 +668,13 @@ a {
   margin-top: 135px;
   height: 15px;
 }
+
+body.new-project-page .eye {
+  visibility: hidden;
+  opacity: 0;
+}
+
+body.new-project-page .eye {
+  opacity: 0;
+  pointer-events: none;
+}

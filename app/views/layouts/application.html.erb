@@ -160,7 +160,19 @@
         opacity: 1;
       }
       
-
+      /* Стиль для скрытия иконки на странице создания проекта */
+      body.new-project-page .eye {
+        visibility: hidden;
+        opacity: 0;
+        pointer-events: none;
+      }
+      
+      /* Для мобильной версии на странице создания проекта */
+      @media (max-width: 576px) {
+        body.new-project-page .eye {
+          visibility: hidden;
+        }
+      }
       
 
       @media (max-width: 1200px) {
@@ -320,7 +332,7 @@
     </style>
   </head>
 
-  <body>
+  <body class="<%= 'new-project-page' if current_page?(new_project_path) %>">
     <div class="menu">
       <%= image_tag "vectoreye.svg", class: "eye", alt: "Логотип" %>
       
@@ -337,9 +349,9 @@
             class: "nav-link #{current_page?(root_path) ? 'active' : ''}" %>
         <%= link_to "О нас", pages_about_path, 
             class: "nav-link #{current_page?(pages_about_path) ? 'active' : ''}" %>
-        <%= link_to "Профиль", pages_profile_path, 
+        <%= link_to "Статьи", pages_profile_path, 
             class: "nav-link #{current_page?(pages_profile_path) ? 'active' : ''}" %>
-        <%= link_to "Создать проект", new_project_path, 
+        <%= link_to "Профиль", new_project_path, 
             class: "nav-link #{current_page?(new_project_path) ? 'active' : ''}" %>
       </nav>
       
