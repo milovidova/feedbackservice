@@ -1,0 +1,193 @@
+<style>
+  /* Обновленный стиль для переключателя */
+  .view-mode-switcher {
+    position: fixed;
+    top: 170px;
+    left: 43px; /* Сдвиг на 43px от левого края */
+    z-index: 1000;
+    padding: 10px;
+  }
+
+  /* Остальные стили остаются без изменений */
+  .view-mode-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 45px;
+  }
+
+  .view-mode-btn {
+    padding-top: 12px;
+    text-decoration: none;
+    text-transform: uppercase;
+    text-align: center;
+    font-family: 'Gilroy', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 20px;
+    width: 140px;
+    height: 27px;
+    display: block;
+  }
+
+  .view-mode-btn.active {
+    background: #191919;
+    color: white;
+  }
+
+  .view-mode-btn.inactive {
+    background: #f8f9fa;
+    color: #333;
+    border: 0.80px solid #191919;
+  }
+
+  /* Заголовок */
+  .projects-title {
+    font-family: 'Gilroy-Semibold', sans-serif;
+    font-weight: 400;
+    font-size: 28px;
+    color: #000;
+    margin-left: 34px;
+    margin-top: 46px;
+  }
+  .view-mode-btn.order-btn {
+  background: #191919;
+  color: #ffffff;
+  border: 0.80px solid #191919;
+}
+.guccih {
+    position: absolute;
+    width: 210px;
+    height: 284px;
+
+    margin-left: 243px;
+    margin-top: 180px;
+
+}
+.lushh {
+        position: absolute;
+    width: 216px;
+    height: 292px;
+
+    margin-left: 502px;
+    margin-top: 300px;
+}
+.nikeh {
+          position: absolute;
+    width: 216px;
+    height: 292px;
+
+     margin-left: 502px;
+    margin-top: -50px;
+}
+.appleh {
+         position: absolute;
+    width: 327px;
+    height: 441px;
+
+       margin-left: 768px;
+    margin-top: 100px;
+}
+.balh {
+           position: absolute;
+    width: 249px;
+    height: 336px;
+   
+     margin-left: 1145px;
+    margin-top: 10px;
+        z-index: 10
+}
+.paph {
+     position: absolute;
+     width: 261px;
+    height: 391px;
+   
+        margin-left: 1200px;
+    margin-top: 370px;
+    z-index: 0
+}
+
+.firsttexth {
+    font-family: 'Gilroy';
+font-weight: 400;
+font-size: 27px;
+line-height: 114%;
+color: #000;
+}
+.sectexth {
+    font-family: 'Gilroy';
+font-weight: 400;
+font-size: 16px;
+line-height: 114%;
+text-transform: uppercase;
+color: #000;
+  margin-top: 70px;
+         margin-left: 100px;
+}
+.arttexth {
+    display: flex;
+    gap: 300px;
+    margin-top: 550px;
+         margin-left: 32px;
+         width: 1440px
+}
+.gucart {
+    font-family: 'Gilroy-Medium';
+font-weight: 400;
+font-size: 18px;
+line-height: 114%;
+color: #000;
+   margin-top: -200px;
+         margin-left: 247px;
+}
+.apart {
+    font-family: 'Gilroy-Medium';
+font-weight: 400;
+font-size: 18px;
+line-height: 114%;
+color: #000;
+   margin-top: 35px;
+         margin-left: 768px;
+}
+.bart {
+    font-family: 'Gilroy-Medium';
+font-weight: 400;
+font-size: 18px;
+line-height: 114%;
+color: #000;
+   margin-top: -274px;
+         margin-left: 1145px;
+}
+</style>
+
+<h1 class="projects-title">Статьи</h1>
+
+<div class="view-mode-switcher">
+  <div class="view-mode-buttons">
+      <%= link_to 'Порядок', '/projects/arth', 
+              class: "view-mode-btn order-btn" %>
+    <%= link_to 'Хаос', artp_projects_path, 
+                class: "view-mode-btn #{@view_mode == :artp ? 'active' : 'inactive'}",
+                style: "transform: rotate(38deg);" %>
+  </div>
+</div>
+
+
+ <div class="guccci">
+            <%= image_tag "guccip.png", class: "guccih" %>  
+             <%= image_tag "lushp.png", class: "lushh" %>  
+              <%= image_tag "nikep.png", class: "nikeh" %>  
+               <%= image_tag "applep.png", class: "appleh" %>  
+                <%= image_tag "balp.png", class: "balh" %>  
+                <%= image_tag "papp.png", class: "paph" %>  
+            </div>
+    <div class="arttexth">        
+<p class='firsttexth'>Как менялись<br> дизайны известных <br> брендов?<p>
+
+     </div>
+
+
+     </div>
+          <p class='gucart'>Как менялся бренд <br> Gucci?<p>
+          
+                  <p class='apart'>Эволюция <br> фирменного стиля <br> apple<p>
+                                    <p class='bart'>Эволюция бренда <br> Balenciaga <p>

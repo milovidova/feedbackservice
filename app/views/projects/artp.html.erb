@@ -1,0 +1,158 @@
+<style>
+  /* Обновленный стиль для переключателя */
+  .view-mode-switcher {
+    position: fixed;
+    top: 170px;
+    left: 43px; /* Сдвиг на 43px от левого края */
+    z-index: 1000;
+    padding: 10px;
+  }
+
+  /* Остальные стили остаются без изменений */
+  .view-mode-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 45px;
+  }
+
+  .view-mode-btn {
+    padding-top: 12px;
+    text-decoration: none;
+    text-transform: uppercase;
+    text-align: center;
+    font-family: 'Gilroy', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 20px;
+    width: 140px;
+    height: 27px;
+    display: block;
+    background: #191919
+  }
+
+  .view-mode-btn.active {
+    background: #191919;
+    color: white;
+  }
+
+  .view-mode-btn.inactive {
+    background: #f8f9fa;
+    color: #333;
+    border: 0.80px solid #191919;
+  }
+
+  /* Заголовок */
+  .projects-title {
+    font-family: 'Gilroy-Semibold', sans-serif;
+    font-weight: 400;
+    font-size: 28px;
+    color: #000;
+    margin-left: 34px;
+    margin-top: 46px;
+  }
+  .view-mode-btn.chaos-style {
+  background: #191919 !important;
+  color: white !important;
+  transform: rotate(38deg);
+}
+.guccih {
+    position: absolute;
+    width: 223px;
+    height: 300px;
+    transform: rotate(-9deg);
+    margin-left: 106px;
+    margin-top: 230px;
+
+}
+.lushh {
+        position: absolute;
+    width: 239px;
+    height: 322px;
+    transform: rotate(135deg);
+    margin-left: 280px;
+    margin-top: 300px;
+}
+.nikeh {
+          position: absolute;
+    width: 258px;
+    height: 348px;
+    transform: rotate(-121deg);
+     margin-left: 500px;
+    margin-top: -30px;
+}
+.appleh {
+         position: absolute;
+    width: 138px;
+    height: 186px;
+    transform: rotate(14deg);
+       margin-left: 770px;
+    margin-top: 270px;
+}
+.balh {
+           position: absolute;
+    width: 225px;
+    height: 304px;
+    transform: rotate(-71deg);
+     margin-left: 1020px;
+    margin-top: 210px;
+        z-index: 10
+}
+.paph {
+     position: absolute;
+     width: 633px;
+    height: 950px;
+   transform: rotate(-130deg);
+        margin-left: 850px;
+    margin-top: -330px;
+    z-index: 0
+}
+
+.firsttexth {
+    font-family: 'Gilroy';
+font-weight: 400;
+font-size: 27px;
+line-height: 114%;
+color: #000;
+}
+.sectexth {
+    font-family: 'Gilroy';
+font-weight: 400;
+font-size: 16px;
+line-height: 114%;
+text-transform: uppercase;
+color: #000;
+  margin-top: 70px;
+         margin-left: 100px;
+}
+.arttexth {
+    display: flex;
+    gap: 300px;
+    margin-top: 550px;
+         margin-left: 32px;
+         width: 1440px
+}
+</style>
+
+<h1 class="projects-title">Статьи</h1>
+
+<div class="view-mode-switcher">
+  <div class="view-mode-buttons">
+    <%= link_to 'Порядок', '/projects/arth', 
+                class: "view-mode-btn #{@view_mode == :arth ? 'active' : 'inactive'}" %>
+ <%= link_to 'Хаос', artp_projects_path, 
+            class: "view-mode-btn chaos-style",
+                style: "transform: rotate(38deg);" %>
+  </div>
+</div>
+ <div class="guccci">
+            <%= image_tag "guccip.png", class: "guccih" %>  
+             <%= image_tag "lushp.png", class: "lushh" %>  
+              <%= image_tag "nikep.png", class: "nikeh" %>  
+               <%= image_tag "applep.png", class: "appleh" %>  
+                <%= image_tag "balp.png", class: "balh" %>  
+                <%= image_tag "papp.png", class: "paph" %>  
+            </div>
+    <div class="arttexth">        
+<p class='firsttexth'>Как менялись<br> дизайны известных <br> брендов?<p>
+
+     </div>
