@@ -32,6 +32,8 @@ post 'telegram/projects/:project_id/feedbacks', to: 'telegram#create_feedback'
   get 'projects/grid', to: 'projects#grid', as: :grid_projects
   get 'projects/arth', to: 'projects#arth', as: :arth_projects    
   get 'projects/artp', to: 'projects#artp', as: :artp_projects 
+  get  "/email_code",  to: "email_codes#new"
+post "/email_code",  to: "email_codes#create"
 
     resources :projects do
     resources :feedbacks, only: [:create]  

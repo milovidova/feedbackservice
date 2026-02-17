@@ -1,0 +1,12 @@
+<h1>Получить код</h1>
+
+<%= form_with url: email_code_path, method: :post do |f| %>
+  <div>
+    <%= f.label :email, "Ваш e‑mail" %>
+    <%= f.email_field :email, required: true %>
+  </div>
+
+  <div>
+    <%= f.submit "Отправить код" %>
+  </div>
+<% end %>
