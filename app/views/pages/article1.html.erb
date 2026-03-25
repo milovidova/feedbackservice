@@ -1,0 +1,632 @@
+
+<style>
+
+.A_MenuArticle {
+  font-family: 'Gilroy-Medium';
+  font-weight: 400;
+  font-size: 35px;
+  line-height: 110%;
+  color: #000;
+  margin-top: -30px
+}
+
+.A_MenuArticle2 {
+  font-family: 'Gilroy-Medium';
+  font-weight: 400;
+  font-size: 35px;
+  line-height: 110%;
+  color: #000;
+  margin-top: -30px;
+  margin-left: 40px
+}
+
+.A_ArticleName {
+  font-family: 'Gilroy-Medium';
+  font-weight: 400;
+  font-size: 72px;
+  line-height: 110%;
+  color: #000;
+  width: 616px;
+  margin-top: 56px
+}
+
+.W_ArticleTop {
+  display: flex;
+  justify-content: space-between
+}
+
+.С_MenuArticle {
+  margin-left: 32px;
+  margin-top: 90px
+}
+
+.A_ArticleText {
+  font-family: 'Gilroy';
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 123%;
+  color: #000;
+  width: 604px;
+  margin-left: 720px;
+
+  transition: width 0.05s linear;
+  text-align: justify;
+  text-align-last: left;
+  position: relative;
+  z-index: 1;
+}
+
+.A_ArticleTag {
+  font-family: 'Gilroy-Medium';
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 110%;
+  text-transform: uppercase;
+  color: #000;
+  border: 0.59px solid #000;
+  border-radius: 59px;
+  width: 180px;
+  height: 26px;
+  display: flex;
+  align-items: center;     
+  justify-content: center;
+  margin-left: 35px;
+  margin-top: 50px;
+  padding-top: 4px;
+  
+  transition: transform 0.05s linear;
+  position: relative;
+  z-index: 1;
+}
+
+.A_ArticleText2 {
+  font-family: 'Gilroy';
+  font-weight: 400;
+  font-size: 43px;
+  line-height: 110%;
+  color: #000;
+  width: 688px;
+  margin-left: 35px;
+  margin-top: -2px;
+ 
+  transition: width 0.05s linear, transform 0.05s linear;
+  text-align: justify;
+  text-align-last: left;
+  position: relative;
+  z-index: 1;
+}
+
+.A_ArticleText3 {
+  font-family: 'Gilroy';
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 123%;
+  color: #000;
+  width: 604px;
+  margin-left: 155px;
+
+  transition: width 0.05s linear, transform 0.05s linear;
+  text-align: justify;
+  text-align-last: left;
+}
+
+.A_ArticleShort {
+  font-family: 'Gilroy';
+  font-weight: 400;
+  font-size: 18px;
+  text-transform: uppercase;
+  color: #000;
+  margin-right: 34px;
+  margin-top: 30px;
+
+  position: relative;
+  z-index: 3;
+}
+
+.W_ArticleMiddle {
+  display: flex;
+  justify-content: space-between;
+  
+  transition: transform 0.05s linear;
+  position: relative;
+  z-index: 1;
+}
+
+.A_ArticleBig {
+  font-family: 'Gilroy-Medium';
+  font-weight: 400;
+  font-size: 195px;
+  line-height: 89%;
+  color: #000;
+  transform: rotate(-90deg);
+  margin-left: 1200px;
+  margin-top: -80px
+}
+
+.Q_ArIm4 {
+  width: 397px;
+  height: 402px;
+}
+
+.Q_ArIm3 {
+  width: 277px;
+  height: 171px;
+  margin-left: 12px;
+  margin-top: 231px
+}
+
+.A_TextInIm2 {
+  font-family: 'Gilroy-Medium';
+  font-weight: 400;
+  font-size: 43px;
+  line-height: 105%;
+  color: #000;
+  transform: rotate(51deg);
+  margin-left: -260px;
+  margin-top: 95px
+}
+
+.A_TextInIm {
+  font-family: 'Gilroy-Medium';
+  font-weight: 400;
+  font-size: 43px;
+  line-height: 105%;
+  color: #000;
+  transform: rotate(37deg);
+  margin-left: -10px;
+  margin-top: 180px
+}
+
+.W_Im {
+  display: flex;
+  margin-left: 368px;
+  margin-top: -240px
+}
+
+.Q_ArIm2 {
+  width: 163px;
+  height: 92px;
+  margin-left: 555px;
+  margin-top: 12px
+}
+
+.Q_ArIm5 {
+  width: 320px;
+  height: 180px;
+  margin-left: 555px;
+  margin-top: 8px
+}
+
+.M_ImName {
+  display: flex;
+  margin-left: 555px;
+  margin-top: -22px
+}
+
+.A_ImName {
+  font-family: 'Gilroy';
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 123%;
+  color: #000;
+}
+
+.A_ImName2 {
+  font-family: 'Gilroy';
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 123%;
+  color: #000;
+  margin-left: 67px
+}
+
+.Q_ArIm {
+  width: 372px;
+  height: 444px;
+  margin-top: 23px;
+  margin-left: -615px;
+  transform: translateX(45px);
+}
+
+.M_ImName2 {
+  display: flex;
+  margin-left: -374px;
+  margin-top: 450px;
+  transform: translateX(45px);
+}
+
+.M_ArNext {
+  display: flex
+}
+
+.A_SmallNext {
+  font-family: 'Gilroy';
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 123%;
+  color: #000;
+  margin-left: 500px;
+  margin-top: 65px;
+  transform: translateX(38px);
+}
+
+.A_ArNext {
+  font-family: 'Gilroy-Medium';
+  font-weight: 400;
+  font-size: 43px;
+  line-height: 110%;
+  color: #000;
+  width: 501px;
+}
+
+.A_BigNext {
+  font-family: 'Gilroy';
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 123%;
+  color: #000;
+}
+
+.A_NextIc {
+  margin-left: -100px;
+  margin-top: 550px;
+  transform: translateX(100px);
+}
+
+.M_ArNext {
+  margin-top: -70px;
+  margin-left: -984px;
+  transform: translateX(100px);
+}
+
+.A_BigNext {
+  margin-left: -107px;
+  margin-top: -30px
+}
+
+.contacts1 {
+  font-family: 'Gilroy-Medium';
+  font-weight: 400;
+  font-size: 30px;
+  color: #000;
+  margin-left: 34px;
+}
+
+.grayline1 {
+  border: 1px solid #d9d9d9;
+  width: 1370px;
+  height: 0px;
+  margin-left: 35px;
+  margin-top: -20px;
+}
+
+.firstfuter1 {
+  font-family: 'Gilroy';
+  font-weight: 400;
+  font-size: 24px;
+  color: #000;
+}
+
+.secondfuter1 {
+  font-family: 'Gilroy-Medium';
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 98%;
+  color: #000;
+}
+
+.thirdfuter1 {
+  font-family: 'Gilroy';
+  font-weight: 400;
+  font-size: 18px;
+  color: #000;
+}
+
+.fourfuter1 {
+  font-family: 'Gilroy';
+  font-weight: 400;
+  font-size: 18px;
+  color: #000;
+  width: 162px;
+}
+
+.futer2 {
+  display: flex;
+  gap: 330px;
+  margin-left: 34px;
+  margin-top: 5px;
+}
+
+.futer3 {
+  margin-top: -105px;
+  margin-left: 417px;
+}
+
+.futer4 {
+  margin-top: 23px;
+}
+
+.fourfuter1 {
+  margin-top: -154px;
+  margin-left: 1120px;
+}
+
+.big1 {
+  font-family: 'Gilroy-Medium';
+  font-weight: 400;
+  font-size: 256px;
+  color: #000;
+  height: 15px;
+  transform: translateX(-1415px);
+  margin-top: 201px;
+  margin-left: 714px;
+}
+
+.M_Futer {
+  margin-left: -1103px;
+  margin-top: 300px;
+}
+
+.O_Futer {
+  margin-left: -45px;
+  margin-top: -200px;
+#     margin-left: 500px;
+}
+.O_Last {
+    margin-top: -1600px;
+    margin-left: 1160px;
+}
+
+.W_ArticleTop,
+.С_MenuArticle,
+.A_ArticleName,
+.A_ArticleBig,
+.W_Im,
+.M_ImName,
+.M_ImName2,
+.M_ArNext,
+.A_SmallNext,
+.A_ArNext,
+.A_BigNext,
+.A_NextIc,
+.O_Futer,
+.M_Futer,
+.contacts1,
+.grayline1,
+.futer2,
+.futer3,
+.futer4,
+.big1,
+.A_TextInIm,
+.A_TextInIm2,
+.A_ArticleShort {
+  position: relative;
+  z-index: 3;
+}
+.A_ArticleShort {
+    display: none
+}
+
+
+</style>
+
+<div class='W_ArticleTop'>
+  <div class='С_MenuArticle'>
+    <p class='A_MenuArticle'>Истоки</p>
+    <p class='A_MenuArticle'>Переосмысление</p>
+    <p class='A_MenuArticle2'>Наследие</p>
+    <p class='A_MenuArticle2'>Диалог</p>
+    <p class='A_MenuArticle2'>Контекст</p>
+    <p class='A_MenuArticle'>Развитие</p>
+  </div>
+  <p class='A_ArticleName'>Как менялся бренд 
+Gucci?</p>
+</div>
+
+
+<p class='A_ArticleText'>Основанный в 1921 году Гуччио Гуччи, бренд долго обходился без официального логотипа. Лишь спустя двенадцать лет сын основателя Альдо создал первый знак: двойную «G» с зеркально расположенными буквами, заложив основу визуальной идентичности Дома.
+
+</p>
+
+<p class='A_ArticleText'>Первый логотип Gucci</p>
+
+<p class='A_ArticleTag'>Переосмысление</p>
+
+<p class='A_ArticleText2'>В 2015 году Алессандро Микеле развернул обе буквы «G» в правую сторону, символизируя движение вперед. </p>
+
+<div class='W_ArticleMiddle'>
+  <p class='A_ArticleText3'>Оригинальная версия Альдо Гуччи говорила о традициях и статусе. Версия Алессандро Микеле стала символом деконструкции и свободы. Сегодня обе версии сосуществуют, дополняя друг друга. Бренд выстраивает диалог между прошлым и будущим, где каждая эпоха находит отклик в следующей. Исторический знак отсылает к наследию, современная интерпретация — к актуальности. Этот баланс делает Gucci одним из самых узнаваемых домов в мире. От флорентийского ремесленника до глобального феномена — каждый этап пути отмечен переосмыслением двойной «G» и превращением символов в объекты желания. Смена креативных директоров неизменно приносит новый взгляд на монограм, но неизменной остается способность бренда превращать свои знаки в культурные коды. Сегодня двойная «G» — живой элемент языка бренда, адаптирующийся к любому контексту: от высокой моды до уличной культуры.</p>
+  <p class='A_ArticleShort'>Название раздела</p>
+</div>
+
+
+<p class='A_ArticleBig'>gucci</p>
+
+<div class='W_Im'>
+  <%= image_tag "Q_ArIm4.png", class: "Q_ArIm4" %>
+  <%= image_tag "Q_ArIm3.png", class: "Q_ArIm3" %>
+  <p class='A_TextInIm2'>gucci</p>
+  <p class='A_TextInIm'>Визуальный ряд</p>
+</div>
+
+<%= image_tag "Q_ArIm2.png", class: "Q_ArIm2" %>
+<%= image_tag "Q_ArIm5.png", class: "Q_ArIm5" %>
+
+<div class='M_ImName'>
+  <p class='A_ImName'>Gucci Fall/<br>Winter</p>
+  <p class='A_ImName2'>2018</p>
+</div>
+
+<%= image_tag "Q_ArIm.png", class: "Q_ArIm" %>
+
+<div class='M_ImName2'>
+  <p class='A_ImName'>Gucci Fall/<br>Winter</p>
+  <p class='A_ImName2'>2018</p>
+</div>
+<div class='O_Last'>
+ <%= link_to article2_path do %> <%= image_tag "A_NextIc.svg", class: "A_NextIc" %><% end %>
+
+<div class='M_ArNext'>
+  <p class='A_SmallNext'>Next</p>
+  <p class='A_ArNext'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp Эволюция бренда Balenciaga
+</p>
+</div>
+
+<p class='A_BigNext'>Читать</p>
+
+<div class='O_Futer'>   
+  <div class='M_Futer'>   
+    <p class='contacts1'>контакты</p>
+    <div class='grayline1'></div>
+    <div class='futer2'>   
+      <p class='firstfuter1'>Reform</p>
+    </div>    
+    <div class='futer3'>   
+      <p class='secondfuter1'>reform@mail.ru</p>
+      <p class='thirdfuter1'>Телеграм канал<br>reeform</p>
+    </div>
+    <div class='futer4'>   
+      <p class='fourfuter1'>Куратор<br>Ноздрин Федор Дизайнер Миловидова Нина</p>
+    </div>
+  </div>
+  <p class='big1'>reform</p>
+</div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  
+  const textLeft = document.querySelectorAll('.A_ArticleText') 
+  const textRight = document.querySelectorAll('.A_ArticleText2') 
+  const tagRight = document.querySelectorAll('.A_ArticleTag') 
+  const middleRight = document.querySelectorAll('.W_ArticleMiddle') 
+  const text3InMiddle = document.querySelector('.A_ArticleText3') 
+  
+  
+  const images = [
+    { element: document.querySelector('.Q_ArIm4'), speed: 0.8, direction: 1, startPos: 0 },
+    { element: document.querySelector('.Q_ArIm3'), speed: 1.2, direction: -1, startPos: 0 },
+    { element: document.querySelector('.Q_ArIm2'), speed: 1.0, direction: 1, startPos: 0 },
+    { element: document.querySelector('.Q_ArIm5'), speed: 1.4, direction: -1, startPos: 0 },
+    { element: document.querySelector('.Q_ArIm'), speed: 0.6, direction: 1, startPos: 0 },
+  
+  ].filter(item => item.element) // Убираем null элементы
+  
+  
+  images.forEach(img => {
+    const rect = img.element.getBoundingClientRect()
+    img.startPos = rect.top + window.scrollY
+    img.originalTransform = img.element.style.transform || 'translate(0px, 0px)'
+  })
+  
+ 
+  const textLeftWidths = [604, 604] // Два блока A_ArticleText
+  const textRightWidth = 688 // A_ArticleText2
+  const text3Width = 604 // A_ArticleText3 внутри W_ArticleMiddle
+  
+
+  const maxScroll = document.documentElement.scrollHeight - window.innerHeight
+  
+
+  const minWidthLeft = 300
+  const minWidthRight = 300
+  
+
+  const maxLeftOffset = -1200 
+  const maxRightOffset = 1200 
+  
+  function animateOnScroll() {
+    const scrollY = window.scrollY
+    const scrollProgress = Math.min(scrollY / maxScroll, 1)
+    
+    
+    textLeft.forEach((element, index) => {
+      const originalWidth = textLeftWidths[index] || 604
+      const newWidth = Math.max(minWidthLeft, originalWidth - (originalWidth - minWidthLeft) * scrollProgress)
+      const moveX = maxLeftOffset * scrollProgress 
+      
+      element.style.width = newWidth + 'px'
+      element.style.transform = `translateX(${moveX}px)`
+      element.style.textAlign = 'justify'
+    })
+    
+
+    const rightOffset = maxRightOffset * scrollProgress
+    
+    textRight.forEach(element => {
+      const newWidth = Math.max(minWidthRight, textRightWidth - (textRightWidth - minWidthRight) * scrollProgress)
+      
+      element.style.width = newWidth + 'px'
+      element.style.transform = `translateX(${rightOffset}px)`
+      element.style.textAlign = 'justify'
+    })
+    
+   
+    tagRight.forEach(element => {
+      element.style.transform = `translateX(${rightOffset}px)`
+    })
+    
+
+    middleRight.forEach(element => {
+      element.style.transform = `translateX(${rightOffset}px)`
+    })
+    
+    
+    if (text3InMiddle) {
+      const newWidth = Math.max(minWidthLeft, text3Width - (text3Width - minWidthLeft) * scrollProgress)
+      text3InMiddle.style.width = newWidth + 'px'
+      text3InMiddle.style.textAlign = 'justify'
+    }
+    
+    
+    images.forEach(img => {
+      const rect = img.element.getBoundingClientRect()
+      const elementTop = rect.top + scrollY
+      const viewportHeight = window.innerHeight
+      
+      
+      if (scrollY + viewportHeight > img.startPos && scrollY < img.startPos + 800) {
+        // Расчет прогресса для этого конкретного изображения
+        const elementScrollStart = img.startPos - viewportHeight
+        const elementScrollEnd = img.startPos + 500
+        const elementProgress = Math.max(0, Math.min(1, 
+          (scrollY - elementScrollStart) / (elementScrollEnd - elementScrollStart)
+        ))
+        
+      
+        let moveX = 0
+        if (elementProgress < 0.5) {
+          // Разъезжаются - до 1000px
+          moveX = 1200 * img.speed * img.direction * (elementProgress * 2)
+        } else {
+          // Возвращаются
+          moveX = 1200 * img.speed * img.direction * (2 - elementProgress * 2)
+        }
+        
+   
+        img.element.style.transform = `translateX(${moveX}px)`
+      } else {
+        // Возвращаем в исходное положение
+        img.element.style.transform = img.originalTransform
+      }
+    })
+  }
+  
+  
+  let ticking = false
+  
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        animateOnScroll()
+        ticking = false
+      })
+      ticking = true
+    }
+  })
+  
+
+  animateOnScroll()
+})
+
+
+</script>

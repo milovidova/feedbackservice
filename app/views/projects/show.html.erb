@@ -142,10 +142,10 @@
 
   input::placeholder {
     color: #b2b2b2 !important;
-    opacity: 1 !important; /* Для Firefox */
+    opacity: 1 !important; 
   }
   
-  /* Для разных браузеров */
+
   input::-webkit-input-placeholder {
     color: #b2b2b2 !important;
   }
@@ -162,12 +162,270 @@
   input::-ms-input-placeholder {
     color: #b2b2b2 !important;
   }
+  .A_FidText {
+    font-family: 'Gilroy-Semibold';
+font-weight: 400;
+font-size: 113px;
+line-height: 91%;
+color: #000;
+margin-left: 35px;
+margin-top: -5px;
+  }
+  .A_FidName {
+font-family: 'Gilroy-Semibold';
+font-weight: 400;
+font-size: 25px;
+text-transform: uppercase;
+color: #000;
+  }
+  .A_FidCat {
+font-family: 'Gilroy';
+font-weight: 400;
+font-size: 16px;
+color: #000;
+  }
+  .A_Fidback {
+font-family: 'Gilroy';
+font-weight: 400;
+font-size: 18px;
+color: #000;
+width: 402px;
+  }
+  .W_Fidback {
+    display: flex;
+    gap: 180px;
+    margin-left: 720px
+  }
+  .A_FidCat{
+      margin-top: -15px
+  }
+  .M_FidName {
+     margin-top: -100px
+  }
+  .M_FidText {
+       margin-top: -72px
+  }
+  .Q_Stars {
+    margin-left: 328px
+  }
+  .Q_GrayLine {
+    border: 1px solid #d9d9d9;
+width: 671px;
+height: 0px;
+margin-left: 720px;
+ margin-top: 20px
+  }
+  .W_Fidback2 {
+    margin-top: 110px
+  }
+  .M_FidName {
+     margin-top: 0;
+     width: 120px;
+}
+.M_FidText {
+       margin-top: 0;
+}
+.W_Fidback2 {
+    margin-top: 30px
+}
+.M_FidName {
+     margin-top: -28px;
+     width: 120px;
+}
+.A_FidText {
+    font-family: 'Gilroy-Semibold';
+    font-weight: 400;
+    font-size: 113px;
+    line-height: 91%;
+    color: #000;
+    margin-left: 35px;
+    margin-top: -5px;
+    margin-bottom: 30px; 
+}
+.A_Also {
+    font-family: 'Gilroy-Semibold';
+font-weight: 400;
+font-size: 28px;
+color: #000;
+margin-left: 35px;
+margin-top: 82px;
+}
+.A_AlsoSmall {
+   font-family: 'Gilroy';
+font-weight: 400;
+font-size: 16px;
+line-height: 123%;
+color: #000;
+margin-left: 35px;
+margin-top: -20px;
+  }
+  .Q_Table {
+width: 1215px;
+height: 634px;
+margin-left: 127px;
+margin-top: 152px;
+z-index: 1;
+position: relative;
+
+  }
+  .Q_Chair2 {
+    width: 1344px;
+height: 768px;
+margin-top: -420px;
+margin-left: 60px;
+z-index: 0;
+heigth: 50px;
+
+  }
+
+
+.Q_Chair2 {
+  pointer-events: none !important;
+}
+
+
+div[style*="pointer-events: none"] div[style*="pointer-events: auto"] {
+  pointer-events: auto !important;
+}
+
+
+div[style*="pointer-events: auto"] img {
+  transition: all 0.3s ease;
+}
+
+.Q_Subjects {
+  width: 1215px;
+  height: 634px;
+  margin-top: -1000px;
+  margin-left: 130px;
+  z-index: 999;
+  position: relative;
+  pointer-events: none;
+}
+
+
+#new-feedbacks-container {
+    width: 100%;
+}
+
+
+.O_Input {
+    border-radius: 25px;
+    width: 671px;
+    height: 78px;
+    background: #ebefe0;
+    display: flex;
+    align-items: center;
+    margin-left: 720px;
+    margin-top: 42px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.Q_InputIc {
+    padding: 11px;
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+
+.Q_InputSent {
+    padding: 11px;
+    flex-shrink: 0;
+}
+
+.A_InputText {
+    font-family: 'Gilroy-Medium';
+    font-weight: 400;
+    font-size: 25px;
+    color: #A8AA9E;
+    background: none;
+    border: none;
+    outline: none;
+    text-align: center;
+    flex: 1;
+}
+
+.A_InputText::placeholder {
+    color: #A8AA9E;
+    text-align: center;
+}
+
+.A_InputText:focus {
+    outline: none;
+}
+
+.A_InputText:focus::placeholder {
+    opacity: 0.5;
+}
+
+
+.new-feedback {
+    margin-top: 20px;
+}
+
+
+.O_Input {
+    border-radius: 25px;
+    width: 650px;  
+    height: 78px;
+    background: #ebefe0;
+    display: flex;
+    align-items: center;
+    margin-left: 720px;
+    margin-top: 42px;
+    padding-left: 20px;
+    padding-right: 5px;
+}
+
+.Q_InputIc {
+    padding: 0px;
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+
+.Q_InputSent {
+    padding: 11px;
+    margin-right: -15px;
+    flex-shrink: 0;
+    position: relative;
+    left: -10px;
+}
+
+.A_InputText {
+    font-family: 'Gilroy-Medium';
+    font-weight: 400;
+    font-size: 25px;
+    color: #A8AA9E;
+    background: none;
+    border: none;
+    outline: none;
+    text-align: center;
+    flex: 1;
+}
+
+.A_InputText::placeholder {
+    color: #A8AA9E;
+    text-align: center;
+}
+
+.A_InputText:focus {
+    outline: none;
+}
+
+.A_InputText:focus::placeholder {
+    opacity: 0.5;
+}
+  .Q_InputSent {
+    padding: 11px;
+    margin-right: -20px;  
+    flex-shrink: 0;
+}
 </style>
 
 
 <div id="feedback-display-template" style="display: none;">
   <div style="display: flex; align-items: flex-start; gap: 25px; cursor: pointer;">
-    <!-- Иконка -->
+   
     <div style="flex-shrink: 0;">
       <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect y="23.4741" width="27.8746" height="27.8746" fill="#ECFFB8"/>
@@ -178,11 +436,138 @@
 
     <div class="feedback-content" 
          style="background: #F8F8F8; border-radius: 20px; padding: 20px 25px; max-width: 474px; font-family: 'Gilroy'; font-size: 20px; color: #b2b2b2; line-height: 1.4; word-wrap: break-word;">
-      <!-- Текст фидбека будет вставлен сюда -->
+     
     </div>
   </div>
 </div>
 
+<p class='A_FidText'>Фидбеки</p>
+
+<%
+ 
+  all_feedbacks_from_db = Feedback.all.to_a
+  random_feedback_1 = all_feedbacks_from_db.sample
+  random_feedback_2 = all_feedbacks_from_db.sample
+  
+  feedback_text_1 = random_feedback_1 ? random_feedback_1.content : "Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus. Nullam dictum felis eu pede mollis pretium. Integer tincidunt."
+  feedback_text_2 = random_feedback_2 ? random_feedback_2.content : "Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus. Nullam dictum felis eu pede mollis pretium. Integer tincidunt."
+%>
+
+<div class="W_Fidback">
+ <div class="M_FidName">
+<p class='A_FidName'>Максим</p>
+<p class='A_FidCat'>Новичок</p>
+ </div>
+  <div class="M_FidText">
+  <%= image_tag "Q_Stars.svg", class: "Q_Stars" %>
+<p class='A_Fidback'><%= feedback_text_1 %></p>
+ </div>
+ </div>
+ <div class="Q_GrayLine"> </div>
+
+<div class="W_Fidback2">
+ <div class="W_Fidback">
+ <div class="M_FidName">
+<p class='A_FidName'>Денис</p>
+<p class='A_FidCat'>Новичок</p>
+ </div>
+  <div class="M_FidText">
+  <%= image_tag "Q_Stars.svg", class: "Q_Stars" %>
+<p class='A_Fidback'><%= feedback_text_2 %></p>
+ </div>
+ </div>
+ <div class="Q_GrayLine"> </div>
+</div>
+
+<div id="new-feedbacks-container"></div>
+
+<div class="O_Input">
+  <%= image_tag "Q_InputIc.svg", class: "Q_InputIc" %>
+  <input type="text" 
+         id="new-feedback-input" 
+         class='A_InputText' 
+         placeholder="Add a feedback" 
+         style="flex: 1; 
+                background: none; 
+                border: none; 
+                outline: none; 
+                font-family: 'Gilroy-Medium'; 
+                font-weight: 400; 
+                font-size: 25px; 
+                color: #A8AA9E; 
+                text-align: center;">
+  <button id="submit-feedback-btn" 
+          style="background: none; 
+                 border: none; 
+                 cursor: pointer; 
+                 padding: 11px; 
+                 display: flex; 
+                 align-items: center; 
+                 justify-content: center;">
+    <%= image_tag "Q_InputSent.svg", class: "Q_InputSent" %>
+  </button>
+</div>
+
+<p class='A_Also'>Похожие проекты</p>
+<p class='A_AlsoSmall'>Reform</p>
+
+
+<div style="position: relative; width: 1215px; height: 634px; margin-left: 127px; margin-top: 12px;">
+  <%= image_tag "Table4.svg", style: "width: 100%; height: 100%; position: relative; z-index: 1; display: none" %>
+  
+
+  <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; pointer-events: none;">
+    <% 
+    
+      all_other_projects = Project.where.not(id: @project.id).to_a
+      
+     
+      random_projects = all_other_projects.sample(5)
+      
+
+      random_positions = []
+      5.times do |i|
+  
+       random_left = rand(80..1000)     
+    random_top = rand(-50..350)      
+    random_rotate = rand(-20..20)    
+    random_width = rand(180..280)    
+        random_positions << {
+          left: random_left,
+          top: random_top,
+          rotate: random_rotate,
+          width: random_width
+        }
+      end
+    %>
+    
+    <% random_projects.each_with_index do |project, index| %>
+      <% if project.image.present? %>
+        <% pos = random_positions[index] %>
+        
+        <div style="position: absolute; 
+                    left: <%= pos[:left] %>px; 
+                    top: <%= pos[:top] %>px; 
+                    width: <%= pos[:width] %>px; 
+                    transform: rotate(<%= pos[:rotate] %>deg); 
+                    z-index: 3;
+                    pointer-events: auto;
+                    transition: transform 0.2s;"
+             onmouseover="this.style.transform='rotate(<%= pos[:rotate] %>deg) scale(1.1)'; this.style.zIndex='10';"
+             onmouseout="this.style.transform='rotate(<%= pos[:rotate] %>deg) scale(1)'; this.style.zIndex='3';">
+          
+          <%= image_tag project.image.url, 
+                style: "width: 100%; 
+                        height: auto; 
+                        display: block;
+                       " %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+<%= image_tag "Q_Subjects.png", class: "Q_Subjects" %>
+<%= image_tag "Q_Chair2.png", style: "width: 1344px; height: 768px; margin-top: -430px; margin-left: 63px; position: relative; z-index: 0; pointer-events: none; display: none" %>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -361,5 +746,139 @@ document.addEventListener('DOMContentLoaded', function() {
       document.removeEventListener('click', closeFormOnClickOutside);
     }
   }
+
+  
+  
+  const submitBtn = document.getElementById('submit-feedback-btn');
+  const feedbackInput = document.getElementById('new-feedback-input');
+  const newFeedbacksContainer = document.getElementById('new-feedbacks-container');
+  const projectId = '<%= @project.id %>';
+  
+ 
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+  
+  
+  function addNewFeedbackToDOM(feedbackData) {
+   
+    const newFeedbackDiv = document.createElement('div');
+    newFeedbackDiv.className = 'W_Fidback';
+    newFeedbackDiv.style.marginTop = '20px';
+    
+    newFeedbackDiv.innerHTML = `
+      <div class="M_FidName">
+        <p class='A_FidName'>${escapeHtml(feedbackData.user_name || 'Вы')}</p>
+        <p class='A_FidCat'>${escapeHtml(feedbackData.user_level || 'Новичок')}</p>
+      </div>
+      <div class="M_FidText">
+        <div style="margin-left: 328px;">
+          <svg width="100" height="20" viewBox="0 0 100 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 0L12.245 6.90983H19.5106L13.6328 11.1803L15.8778 18.0902L10 13.8197L4.12215 18.0902L6.36715 11.1803L0.489435 6.90983H7.75499L10 0Z" fill="#FFD700"/>
+            <path d="M30 0L32.245 6.90983H39.5106L33.6328 11.1803L35.8778 18.0902L30 13.8197L24.1222 18.0902L26.3672 11.1803L20.4894 6.90983H27.755L30 0Z" fill="#FFD700"/>
+            <path d="M50 0L52.245 6.90983H59.5106L53.6328 11.1803L55.8778 18.0902L50 13.8197L44.1222 18.0902L46.3672 11.1803L40.4894 6.90983H47.755L50 0Z" fill="#FFD700"/>
+            <path d="M70 0L72.245 6.90983H79.5106L73.6328 11.1803L75.8778 18.0902L70 13.8197L64.1222 18.0902L66.3672 11.1803L60.4894 6.90983H67.755L70 0Z" fill="#FFD700"/>
+            <path d="M90 0L92.245 6.90983H99.5106L93.6328 11.1803L95.8778 18.0902L90 13.8197L84.1222 18.0902L86.3672 11.1803L80.4894 6.90983H87.755L90 0Z" fill="#FFD700"/>
+          </svg>
+        </div>
+        <p class='A_Fidback'>${escapeHtml(feedbackData.content)}</p>
+      </div>
+    `;
+    
+    
+    const grayLine = document.createElement('div');
+    grayLine.className = 'Q_GrayLine';
+    
+  
+    newFeedbacksContainer.appendChild(grayLine);
+    newFeedbacksContainer.appendChild(newFeedbackDiv);
+    
+   
+    newFeedbackDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+  
+ 
+  async function submitNewFeedback() {
+    const content = feedbackInput.value.trim();
+    
+    if (!content) {
+      alert('Введите текст фидбека');
+      return;
+    }
+    
+   
+    submitBtn.disabled = true;
+    const originalBtnContent = submitBtn.innerHTML;
+    submitBtn.innerHTML = '⏳';
+    
+    try {
+      const response = await fetch(`/projects/${projectId}/feedbacks`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content,
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          feedback: {
+            content: content,
+            category: 'Композиция',
+            is_helpful: false
+          }
+        })
+      });
+      
+      const data = await response.json();
+      
+      if (response.ok && data.success) {
+        
+        addNewFeedbackToDOM({
+          content: content,
+          user_name: data.feedback.user.username || 'Вы',
+          user_level: 'Новичок'
+        });
+        
+     
+        feedbackInput.value = '';
+        
+       
+        const successMsg = document.createElement('div');
+        successMsg.textContent = '✓ Фидбек добавлен!';
+        successMsg.style.cssText = 'position: fixed; bottom: 20px; right: 20px; background: #4CAF50; color: white; padding: 12px 24px; border-radius: 8px; z-index: 1000; font-family: Gilroy; font-size: 16px; box-shadow: 0 2px 10px rgba(0,0,0,0.2);';
+        document.body.appendChild(successMsg);
+        setTimeout(() => successMsg.remove(), 2000);
+      } else {
+        throw new Error(data.errors || 'Ошибка при отправке');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      const errorMsg = document.createElement('div');
+      errorMsg.textContent = '✗ Ошибка при отправке фидбека';
+      errorMsg.style.cssText = 'position: fixed; bottom: 20px; right: 20px; background: #f44336; color: white; padding: 12px 24px; border-radius: 8px; z-index: 1000; font-family: Gilroy; font-size: 16px;';
+      document.body.appendChild(errorMsg);
+      setTimeout(() => errorMsg.remove(), 3000);
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = originalBtnContent;
+    }
+  }
+  
+
+  if (submitBtn) {
+    submitBtn.addEventListener('click', submitNewFeedback);
+  }
+  
+  if (feedbackInput) {
+    feedbackInput.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        submitNewFeedback();
+      }
+    });
+  }
 });
+
+
 </script>

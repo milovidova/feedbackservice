@@ -1,1 +1,528 @@
-<h1>Статьи</h1>
+<style>
+.W_ProfileTop {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 34px;
+    margin-right: 34px;
+}
+.M_Info {
+    display: block
+}
+.A_Profile {
+font-family: 'Gilroy-Semibold';
+font-weight: 400;
+font-size: 28px;
+color: #000;
+}
+.A_Profile2 {
+font-family: 'Gilroy-Semibold';
+font-weight: 400;
+font-size: 28px;
+color: #000;
+margin-left: -100px
+}
+.A_Info {
+font-family: 'Gilroy';
+font-weight: 400;
+font-size: 18px;
+color: #000;
+margin-top: -10px;
+margin-left: -100px
+}
+
+.A_ProfileName {
+font-family: 'Gilroy-Semibold';
+font-weight: 400;
+font-size: 133px;
+line-height: 83%;
+color: #000;
+margin-top: 32px;
+margin-left: 100px
+}
+.A_Photo {
+    width: 152px;
+height: 155px;
+margin-top: 30px;
+ margin-right: 47px;
+}
+.C_ProfileFilter {
+    display: flex;
+    margin-left: 34px;
+    gap: 32px
+}
+.A_ProfileFilter {
+font-family: 'Gilroy-Semibold';
+font-weight: 400;
+font-size: 25px;
+color: #000;
+cursor: pointer;
+}
+.A_ProfileFilter2 {
+font-family: 'Gilroy-Semibold';
+font-weight: 400;
+font-size: 25px;
+color: #a6a6a6;
+cursor: pointer;
+}
+.Q_ProfileLine {
+border: 1px solid #d9d9d9;
+width: 1398px;
+height: 0px;
+margin-left: 34px;
+margin-top: -6px
+}
+.A_MyProjects {
+font-family: 'Gilroy-Semibold';
+font-weight: 400;
+font-size: 70px;
+line-height: 91%;
+color: #000;
+transform: rotate(-54deg);
+  position: relative;
+z-index: 10;
+margin-top: -500px;
+margin-left: -300px
+}
+
+.A_MyProjects2 {
+font-family: 'Gilroy-Semibold';
+font-weight: 400;
+font-size: 70px;
+line-height: 91%;
+color: #000;
+transform: rotate(-25deg);
+margin-top: 300px;
+margin-left: 120px;
+  position: relative;
+z-index: 10;
+}
+.Q_Haos {
+    width: 1678px;
+height: 942px;
+margin-left: -150px;
+  position: relative;
+margin-top: -30px;
+z-index: 10
+}
+.A_MyFeed {
+    font-family: 'Gilroy-Semibold';
+font-weight: 400;
+font-size: 70px;
+line-height: 91%;
+color: #000;
+}
+.A_ProjectCategory {
+font-family: 'Gilroy-Semibold';
+font-weight: 400;
+font-size: 25px;
+text-transform: uppercase;
+color: #000;
+}
+.A_ProjectNameMini {
+font-family: 'Gilroy';
+font-weight: 400;
+font-size: 16px;
+color: #000;
+margin-top: -14px;
+}
+.A_MyFeedText {
+font-family: 'Gilroy';
+font-weight: 400;
+font-size: 18px;
+color: #000;
+width: 402px;
+}
+.Q_LineFeed {
+    border: 1px solid #d9d9d9;
+width: 671px;
+height: 0px;
+margin: 10px 0;
+}
+.S_MyFeedbacks {
+    display: flex;
+    margin-left: 34px;
+    justify-content: space-between;
+}
+.O_MyFeedBacks {
+margin-left: -200px;
+transform: translateX(-35px);
+margin-top: 170px;
+}
+
+.W_ProfileTop {
+margin-top: 10px
+}
+.W_MyFeedback {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    background: transparent;
+}
+.W_CloseFeed {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    cursor: pointer;
+    background: transparent;
+    width: 100%;
+}
+.A_MyFeed {
+    transform: translateX(-5px);
+}
+.M_MyFeedName {
+    margin-top: -26px;
+}
+.Q_ArrowBottom {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    margin-left: 376px;
+}
+.Q_ArrowRight {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    margin-left: 376px;
+}
+.Q_ArrowRight.rotated {
+    transform: rotate(90deg);
+}
+.A_ProjectCategory {
+    margin-top: 30px;
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+}
+.hover-image-preview {
+    position: fixed;
+    width: 230px;
+    height: auto;
+    z-index: 1000;
+    pointer-events: none;
+    opacity: 0;
+}
+.feedback-hidden-content {
+    display: none;
+}
+.feedback-hidden-content.open {
+    display: block;
+}
+.M_MyFeedText {
+    position: relative;
+}
+.feedback-open-content {
+    display: block;
+}
+.feedback-item {
+    background: transparent;
+}
+.W_CloseFeed .M_MyFeedName {
+    display: flex;
+    flex-direction: column;
+}
+.hidden-project-name {
+    font-family: 'Gilroy';
+    font-weight: 400;
+    font-size: 16px;
+    color: #000;
+    margin-top: -14px;
+    display: none;
+}
+.feedback-hidden-content.open .hidden-project-name {
+    display: block;
+    margin-left: 0;
+    margin-top: -14px;
+    margin-bottom: 10px;
+}
+
+
+</style>
+
+<div class="W_ProfileTop">
+        <p class='A_Profile'>Profile</p>
+        <div class="M_Info">
+        <p class='A_Profile2'>Info</p>
+        <p class='A_Info'>Проекты: 7</p>
+        <p class='A_Info'>Фидбеки: 10</p>
+        <p class='A_Info'>Мои фидбеки: 11</p>
+      </div>
+
+       <p class='A_ProfileName'>Max <br> Designer</p>
+       <%= image_tag "A_Photo.png", class: "A_Photo" %>
+</div>
+
+<div class="C_ProfileFilter">
+    <p class='A_ProfileFilter'>Портфолио</p>
+    <p class='A_ProfileFilter2'>Фидбеки</p>
+    <p class='A_ProfileFilter2'>Настройки</p>
+</div>
+
+<div class="Q_ProfileLine"></div>
+
+
+<div class="portfolio-content">
+  <p class='A_MyProjects'>Мои</p>
+  <p class='A_MyProjects2'>проекты</p>
+
+  <%= image_tag "Q_Haos.png", class: "Q_Haos" %>
+
+  
+  <div style="position: relative; width: 100%; margin-top: -800px; margin-bottom: 100px; min-height: 500px;">
+    
+    <% 
+      all_projects = Project.all.to_a
+      random_projects = all_projects.shuffle.first(7)
+      random_positions = []
+      random_projects.each_with_index do |project, index|
+        random_left = rand(150..1350)
+        random_top = rand(-100..400)
+        random_rotate = rand(-25..25)
+        random_width = rand(180..280)
+        
+        random_positions << {
+          left: random_left,
+          top: random_top,
+          rotate: random_rotate,
+          width: random_width
+        }
+      end
+    %>
+    
+    <% random_projects.each_with_index do |project, index| %>
+      <% if project.image.present? %>
+        <% pos = random_positions[index] %>
+        
+        <div style="position: absolute; 
+                    left: <%= pos[:left] %>px; 
+                    top: <%= pos[:top] %>px; 
+                    width: <%= pos[:width] %>px; 
+                    transform: rotate(<%= pos[:rotate] %>deg); 
+                    z-index: 1;
+                    cursor: pointer;
+                    transition: transform 0.3s ease;"
+             onmouseover="this.style.transform='rotate(<%= pos[:rotate] %>deg) scale(1.1)'; this.style.zIndex='2';"
+             onmouseout="this.style.transform='rotate(<%= pos[:rotate] %>deg) scale(1)'; this.style.zIndex='1';">
+          
+          <%= image_tag project.image.url, 
+                style: "width: 100%; 
+                        height: auto; 
+                        display: block;" %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+
+<div class="feedback-content" style="display: none;">
+  <div class="S_MyFeedbacks">
+    <p class='A_MyFeed'>Мои фидбеки</p>
+    <div class="O_MyFeedBacks">
+      
+      <% 
+       
+        all_feedbacks = Feedback.all.to_a
+        
+       
+        feedback_categories = ['Айдентика', 'Фирменный стиль', 'Баннер', 'Постер']
+        
+        
+        all_projects_array = Project.all.to_a
+        
+  
+        feedbacks_data = []
+        feedback_categories.each do |category|
+          random_feedback = all_feedbacks.sample
+          random_project = all_projects_array.sample
+          
+          feedbacks_data << {
+            category: category,
+            text: random_feedback ? random_feedback.content : "Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus. Nullam dictum felis eu pede mollis pretium. Integer tincidunt.",
+            image_url: random_project&.image&.url || ""
+          }
+        end
+      %>
+      
+  
+      <div class="W_MyFeedback" data-feedback-index="main">
+        <div class="M_MyFeedName">
+          <p class='A_ProjectCategory' data-hover-image="<%= feedbacks_data[0][:image_url] %>"><%= feedbacks_data[0][:category] %></p>
+          <p class='A_ProjectNameMini'>Графический дизайн</p>
+        </div>
+        <div class="M_MyFeedText">
+          <%= image_tag "Q_ArrowBottom.svg", class: "Q_ArrowBottom", style: "transform: rotate(180deg);" %>
+          <div class="feedback-open-content">
+            <p class='A_MyFeedText'><%= feedbacks_data[0][:text] %></p>
+          </div>
+        </div>
+      </div>
+      <div class="Q_LineFeed"></div>
+      
+    
+      <div class="W_MyFeedback" data-feedback-index="0">
+        <div class="M_MyFeedName">
+          <p class='A_ProjectCategory' data-hover-image="<%= feedbacks_data[1][:image_url] %>"><%= feedbacks_data[1][:category] %></p>
+          <p class='A_ProjectNameMini hidden-project-name' style="display: none;">Графический дизайн</p>
+        </div>
+        <div class="M_MyFeedText">
+          <%= image_tag "Q_ArrowRight.svg", class: "Q_ArrowRight" %>
+          <div class="feedback-hidden-content" id="feedback-hidden-0">
+            <p class='A_MyFeedText'><%= feedbacks_data[1][:text] %></p>
+          </div>
+        </div>
+      </div>
+      <div class="Q_LineFeed"></div>
+      
+
+      <div class="W_MyFeedback" data-feedback-index="1">
+        <div class="M_MyFeedName">
+          <p class='A_ProjectCategory' data-hover-image="<%= feedbacks_data[2][:image_url] %>"><%= feedbacks_data[2][:category] %></p>
+          <p class='A_ProjectNameMini hidden-project-name' style="display: none;">Графический дизайн</p>
+        </div>
+        <div class="M_MyFeedText">
+          <%= image_tag "Q_ArrowRight.svg", class: "Q_ArrowRight" %>
+          <div class="feedback-hidden-content" id="feedback-hidden-1">
+            <p class='A_MyFeedText'><%= feedbacks_data[2][:text] %></p>
+          </div>
+        </div>
+      </div>
+      <div class="Q_LineFeed"></div>
+      
+   
+      <div class="W_MyFeedback" data-feedback-index="2">
+        <div class="M_MyFeedName">
+          <p class='A_ProjectCategory' data-hover-image="<%= feedbacks_data[3][:image_url] %>"><%= feedbacks_data[3][:category] %></p>
+          <p class='A_ProjectNameMini hidden-project-name' style="display: none;">Графический дизайн</p>
+        </div>
+        <div class="M_MyFeedText">
+          <%= image_tag "Q_ArrowRight.svg", class: "Q_ArrowRight" %>
+          <div class="feedback-hidden-content" id="feedback-hidden-2">
+            <p class='A_MyFeedText'><%= feedbacks_data[3][:text] %></p>
+          </div>
+        </div>
+      </div>
+      <div class="Q_LineFeed"></div>
+      
+    </div>
+  </div>
+</div>
+
+
+<div class="settings-content" style="display: none;">
+  <div style="position: relative; width: 100%; margin-top: 50px; padding: 20px;">
+    <p style="font-family: 'Gilroy'; font-size: 24px; color: #000;">Здесь будут настройки</p>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+ 
+  const filterItems = document.querySelectorAll('.C_ProfileFilter p');
+  const portfolioContent = document.querySelector('.portfolio-content');
+  const feedbackContent = document.querySelector('.feedback-content');
+  const settingsContent = document.querySelector('.settings-content');
+  
+  function showTab(tab) {
+    portfolioContent.style.display = 'none';
+    feedbackContent.style.display = 'none';
+    settingsContent.style.display = 'none';
+    
+    filterItems.forEach(item => {
+      item.className = 'A_ProfileFilter2';
+    });
+    
+    if(tab === 'portfolio') {
+      portfolioContent.style.display = 'block';
+      filterItems[0].className = 'A_ProfileFilter';
+    } else if(tab === 'feedback') {
+      feedbackContent.style.display = 'block';
+      filterItems[1].className = 'A_ProfileFilter';
+    } else if(tab === 'settings') {
+      settingsContent.style.display = 'block';
+      filterItems[2].className = 'A_ProfileFilter';
+    }
+  }
+  
+  if(filterItems[0]) filterItems[0].onclick = () => showTab('portfolio');
+  if(filterItems[1]) filterItems[1].onclick = () => showTab('feedback');
+  if(filterItems[2]) filterItems[2].onclick = () => showTab('settings');
+  
+  showTab('portfolio');
+  
+
+  const mainFeedback = document.querySelector('.W_MyFeedback:first-child');
+  const mainArrow = mainFeedback ? mainFeedback.querySelector('.Q_ArrowBottom') : null;
+  const mainContent = mainFeedback ? mainFeedback.querySelector('.feedback-open-content') : null;
+  
+  if (mainArrow && mainContent) {
+    mainArrow.addEventListener('click', function(e) {
+      e.stopPropagation();
+      if (mainContent.style.display === 'none') {
+        mainContent.style.display = 'block';
+        mainArrow.style.transform = 'rotate(180deg)';
+      } else {
+        mainContent.style.display = 'none';
+        mainArrow.style.transform = 'rotate(0deg)';
+      }
+    });
+  }
+  
+
+  const allFeedbacks = document.querySelectorAll('.W_MyFeedback');
+  
+  allFeedbacks.forEach((feedback, index) => {
+   
+    if (index === 0) return;
+    
+    const arrow = feedback.querySelector('.Q_ArrowRight');
+    const hiddenContent = feedback.querySelector('.feedback-hidden-content');
+    const hiddenProjectName = feedback.querySelector('.hidden-project-name');
+    
+    if (hiddenContent && arrow) {
+      hiddenContent.classList.remove('open');
+      
+      arrow.addEventListener('click', function(e) {
+        e.stopPropagation();
+        
+        if (hiddenContent.classList.contains('open')) {
+          hiddenContent.classList.remove('open');
+          arrow.classList.remove('rotated');
+          if (hiddenProjectName) hiddenProjectName.style.display = 'none';
+        } else {
+          hiddenContent.classList.add('open');
+          arrow.classList.add('rotated');
+          if (hiddenProjectName) hiddenProjectName.style.display = 'block';
+        }
+      });
+    }
+  });
+  
+  
+  const categoryTitles = document.querySelectorAll('.A_ProjectCategory');
+  const hoverImage = document.createElement('img');
+  hoverImage.className = 'hover-image-preview';
+  document.body.appendChild(hoverImage);
+  
+  categoryTitles.forEach(title => {
+    title.addEventListener('mouseenter', function(e) {
+      const imageUrl = this.getAttribute('data-hover-image');
+      if (imageUrl && imageUrl !== '') {
+        hoverImage.src = imageUrl;
+        hoverImage.style.opacity = '1';
+        
+        const rect = this.getBoundingClientRect();
+        hoverImage.style.left = (rect.left - 250) + 'px';
+        hoverImage.style.top = (rect.top - 50) + 'px';
+      }
+    });
+    
+    title.addEventListener('mousemove', function(e) {
+      const rect = this.getBoundingClientRect();
+      hoverImage.style.left = (rect.left - 250) + 'px';
+      hoverImage.style.top = (rect.top - 50) + 'px';
+    });
+    
+    title.addEventListener('mouseleave', function() {
+      hoverImage.style.opacity = '0';
+    });
+  });
+});
+</script>

@@ -18,7 +18,13 @@ Rails.application.routes.draw do
   get "pages/about"      
   get "pages/profile"    
   get "pages/articles"
- 
+   get '/pages/create', to: 'pages#create'
+   get 'article1', to: 'pages#article1'
+    get 'article2', to: 'pages#article2'
+    get 'article3', to: 'pages#article3'
+    get 'article4', to: 'pages#article4'
+    get 'article5', to: 'pages#article5'
+    get 'article6', to: 'pages#article6'
 
 get 'telegram/app', to: 'telegram#app'
 get 'telegram/projects', to: 'telegram#projects' 

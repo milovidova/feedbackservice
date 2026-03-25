@@ -1,14 +1,14 @@
 <style>
-  /* Обновленный стиль для переключателя */
+  
   .view-mode-switcher {
     position: fixed;
     top: 170px;
-    left: 43px; /* Сдвиг на 43px от левого края */
+    left: 43px; 
     z-index: 1000;
     padding: 10px;
   }
 
-  /* Остальные стили остаются без изменений */
+
   .view-mode-buttons {
     display: flex;
     flex-direction: column;
@@ -40,7 +40,7 @@
     border: 0.80px solid #191919;
   }
 
-  /* Заголовок */
+ 
   .projects-title {
     font-family: 'Gilroy-Semibold', sans-serif;
     font-weight: 400;
@@ -173,11 +173,13 @@ color: #000;
 
 
  <div class="guccci">
-            <%= image_tag "guccip.png", class: "guccih" %>  
-             <%= image_tag "lushp.png", class: "lushh" %>  
-              <%= image_tag "nikep.png", class: "nikeh" %>  
-               <%= image_tag "applep.png", class: "appleh" %>  
-                <%= image_tag "balp.png", class: "balh" %>  
+           <%= link_to article1_path do %>
+  <%= image_tag "guccip.png", class: "guccih" %>
+<% end %>
+             <%= link_to article5_path do %> <%= image_tag "lushp.png", class: "lushh" %>  <% end %>
+                      <%= link_to article4_path do %><%= image_tag "nikep.png", class: "nikeh" %>  <% end %>
+               <%= link_to article3_path do %> <%= image_tag "applep.png", class: "appleh" %>  <% end %>
+                <%= link_to article2_path do %> <%= image_tag "balp.png", class: "balh" %>  <% end %>
                 <%= image_tag "papp.png", class: "paph" %>  
             </div>
     <div class="arttexth">        
@@ -187,7 +189,9 @@ color: #000;
 
 
      </div>
-          <p class='gucart'>Как менялся бренд <br> Gucci?<p>
+       <%= link_to article1_path, class: "gucart-link" do %>
+  <p class='gucart'>Как менялся бренд <br> Gucci?<p>
+<% end %>
           
                   <p class='apart'>Эволюция <br> фирменного стиля <br> apple<p>
                                     <p class='bart'>Эволюция бренда <br> Balenciaga <p>

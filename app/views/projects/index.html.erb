@@ -102,7 +102,7 @@
     font-size: 14px;
   }
 
-  /* Стили для режима сетки */
+  
   .grid-container {
     width: 100%;
     margin-top: 30px;
@@ -493,6 +493,90 @@
       top: 60px;
     }
   }
+
+  .A_FilterName {
+font-family: 'Gilroy-Medium';
+font-weight: 400;
+font-size: 18px;
+line-height: 114%;
+color: #000;
+  }
+  .A_FilterNumber {
+font-family: 'Gilroy-Medium';
+font-weight: 400;
+font-size: 12px;
+line-height: 114%;
+color: #a1a1a1;
+margin-left: 70px;
+margin-top: -10px;
+  }
+  .W_FilterTop {
+    display: flex;
+    justify-content: center;
+    gap: 105px
+  }
+  .M_FilterName {
+display: block;
+
+  }
+  .A_FilterText {
+font-family: 'Gilroy';
+font-weight: 400;
+font-size: 13px;
+line-height: 114%;
+color: #000;
+text-align: center;
+
+  }
+  .A_Filter {
+    border: 1.14px solid #ececec;
+border-radius: 7px;
+width: 122px;
+height: 43px;
+background; 
+display: flex;
+justify-content: center;
+align-items: center;
+cursor: pointer;
+transition: all 0.2s ease;
+  }
+  .A_Filter:hover {
+    background: #f5f5f5;
+  }
+  .C_Filters {
+    display: flex;
+    gap: 9px;
+    margin-top: 6px;
+    margin-left: 19px;
+    justify-content: center;
+  }
+  .O_Filter {
+border: 1.14px solid #ececec;
+border-radius: 8px;
+width: 425px;
+height: 140px;
+box-shadow: 0 0 5px 0 rgba(183, 183, 183, 0.25);
+background: #fff;
+margin-left: 522px
+  }
+.O_Filter {
+    border: 1.14px solid #ececec;
+    border-radius: 8px;
+    width: 425px;
+    height: 140px;
+    box-shadow: 0 0 5px 0 rgba(183, 183, 183, 0.25);
+    background: #fff;
+    position: fixed;
+    top: 643px;
+    z-index: 1000;
+}
+  .C_Filters {
+    display: flex;
+    gap: 9px;
+    margin-top: 6px;
+    margin-left: -1px;
+    justify-content: center;
+  }
 </style>
 
 <h1 class="projects-title">Проекты</h1>
@@ -596,6 +680,7 @@
         
         <div class="chaos-project" 
              data-project-id="<%= project.id %>"
+             data-category="<%= project.category %>"
              style="left: calc(<%= random_x %>% + <%= small_offset_x %>px); 
                     top: <%= random_y + small_offset_y %>px; 
                     width: <%= random_width %>px; 
@@ -730,6 +815,32 @@
     <%= link_to '➕ Создать проект', new_project_path, 
                 class: "create-project-btn" %>
   </div>
+<% end %>
+
+<% if @view_mode == :gallery %>
+<div class="O_Filter">
+
+<div class="W_FilterTop">
+ <%= image_tag "Q_GrayArrow.svg", class: "Q_GrayArrow" %>
+ <div class="M_FilterName">
+<p class='A_FilterName'>Выберите категорию</p>
+<p class='A_FilterNumber'>1/3</p>
+ </div>
+  <%= image_tag "Q_BlackArrow.svg", class: "Q_BlackArrow" %>
+</div>
+
+<div class="C_Filters">
+<div class="A_Filter" data-filter="Графический дизайн">
+<p class='A_FilterText'>Графический дизайн</p>
+</div>
+<div class="A_Filter" data-filter="Веб дизайн">
+<p class='A_FilterText'>Веб дизайн</p>
+</div>
+<div class="A_Filter" data-filter="Мобильный дизайн">
+<p class='A_FilterText'>Мобильный дизайн</p>
+</div>
+</div>
+</div>
 <% end %>
 
 <script>
@@ -948,5 +1059,54 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }, { passive: true });
   }
+
+  
+  
+  
+  const filterButtons = document.querySelectorAll('.A_Filter');
+  
+ 
+  function updateActiveButton(activeButton) {
+    filterButtons.forEach(btn => {
+      const buttonText = btn.querySelector('.A_FilterText')?.innerText;
+      if (buttonText === activeButton) {
+        btn.style.backgroundColor = '#ECFFB8';
+        btn.style.border = '1.14px solid #ECFFB8';
+      } else {
+        btn.style.backgroundColor = '';
+        btn.style.border = '1.14px solid #ececec';
+      }
+    });
+  }
+  
+  
+  function filterProjects(category) {
+    projects.forEach(project => {
+      const projectCategory = project.getAttribute('data-category');
+      if (category === 'all' || projectCategory === category) {
+        project.style.display = 'block';
+      } else {
+        project.style.display = 'none';
+      }
+    });
+  }
+  
+  
+  filterButtons.forEach(button => {
+    const buttonText = button.querySelector('.A_FilterText')?.innerText;
+    
+    if (buttonText) {
+      button.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+       
+        updateActiveButton(buttonText);
+        
+      
+        filterProjects(buttonText);
+      });
+    }
+  });
+  
 });
 </script>

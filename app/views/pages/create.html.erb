@@ -1,0 +1,559 @@
+<style>
+  .A_TextCreate2 {
+    font-family: 'Gilroy';
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 145%;
+    color: #000;
+    margin-left: 145px;
+    margin-top: -30px;
+  }
+
+  .A_Create {
+    font-family: 'Gilroy-Medium';
+    font-weight: 400;
+    font-size: 140px;
+    line-height: 89%;
+    color: #000;
+    transform: rotate(-90deg);
+    margin-left: -46px;
+  }
+
+  .Q_Upper {
+    width: 542px;
+    height: 118px;
+    position: relative;
+    z-index: 5;
+  }
+
+  .Q_LoadIm {
+    width: 542px;
+    height: 377px;
+    margin-top: 0px;
+    cursor: pointer;
+    position: relative;
+    z-index: 30;
+  }
+ 
+  .O_CreateProject {
+    display: flex;
+    margin-top: 30px;
+  }
+  
+  .W_LoadProject {
+    display: block;
+    margin-left: 43px;
+    margin-top: 18px;
+    position: relative;
+  }
+  
+  .A_Load {
+    font-family: 'Gilroy-Semibold';
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 145%;
+    text-transform: uppercase;
+    color: #000;
+    margin-left: 207px;
+  }
+  
+  .A_Name {
+    font-family: 'Gilroy';
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 145%;
+    color: #000;
+  }
+  
+  .O_Name {
+    display: block;
+    transform: translateX(130px);
+  }  
+  
+  .A_CreateButton {
+    font-family: 'Gilroy-Medium';
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 123%;
+    text-transform: uppercase;
+    color: #000;
+    white-space: nowrap;
+    # display: inline-block;
+    cursor: pointer;
+    background: none;
+    border: 1px solid #DADADA;
+    padding: 10px 18px;
+    width: fit-content;
+  }
+  
+  .W_Button {
+    margin-top: 40px;
+  }
+  
+  .W_Button label {
+    margin-right: 0;
+  }
+  
+  .category-btn {
+    transition: opacity 0.3s;
+  }
+  
+#   .category-btn.hidden {
+#     display: none;
+#   }
+  
+  .W_Name input, .W_Name textarea {
+    background: none;
+    border: none;
+    font-family: 'Gilroy';
+    font-size: 18px;
+    color: #000;
+    outline: none;
+    resize: none;
+    width: auto;
+  }
+  
+  .W_Name textarea {
+    overflow: hidden;
+  }
+  
+  .file-field-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 542px;
+    height: 118px;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 10;
+  }
+  
+  .A_TextCreate3 {
+    font-family: 'Gilroy';
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 145%;
+    color: #000;
+    width: 228px;
+    margin-top: 20px
+  }
+  
+  .A_TextCreate4 {
+    font-family: 'Gilroy';
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 145%;
+    color: #000;
+    margin-top: 70px;
+  }
+  
+  .W_TextCreate {
+    display: flex;
+    margin-left: 50px;
+    margin-top: -10px;
+    gap: 20px;
+  }
+  
+  .Q_Sent {
+    margin-left: 900px;
+    margin-top: 0px;
+    cursor: pointer;
+  }
+  
+  .submit-button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+  }
+  
+  input[type="radio"] {
+    display: none;
+  }
+  
+  #project_image {
+    display: none;
+  }
+  
+  .image-stack {
+    position: relative;
+    width: 542px;
+    height: 377px;
+    margin-top: -36px;
+  }
+  
+  .uploaded-image {
+    position: absolute;
+    top: -150px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 275px;
+    height: auto;
+    z-index: 20;
+    display: none;
+  }
+  
+  .Q_LoadIm {
+    position: relative;
+    z-index: 30;
+    width: 542px;
+    height: 377px;
+  }
+  
+  .category-sticker {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: white;
+    padding: 8px 16px;
+    font-family: 'Gilroy-Medium';
+    font-size: 18px;
+    line-height: 123%;
+    text-transform: uppercase;
+    color: #000;
+    border: 1px solid #DADADA;
+    z-index: 40;
+    display: none;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+  .Q_Pan {
+    margin-left: -194px;
+    margin-bottom: 10px
+  }
+  .Q_Line {
+    margin-left: -18px;
+    
+  }
+
+.W_Button {
+  display: flex;
+  flex-direction: column;
+}
+
+.W_Name input, .W_Name textarea {
+  background: none;
+  border: none;
+  font-family: 'Gilroy';
+  font-size: 18px;
+  color: #000;
+  outline: none;
+  resize: none;
+  width: auto;
+  text-indent: 20px; 
+}
+.W_Name input {
+  padding-bottom: 10px; 
+}
+.W_Name input {
+  transform: translateY(-13px);
+}
+
+.W_Name input, .W_Name textarea {
+  background: none;
+  border: none;
+  font-family: 'Gilroy';
+  font-size: 18px;
+  color: #000;
+  outline: none;
+  resize: none;
+  width: auto;
+  text-indent: 20px;
+  line-height: 1.4;
+  padding: 0;
+  margin: 0;
+}
+
+.W_Name input {
+  padding-bottom: 8px;
+  line-height: 1.4;
+}
+
+.W_Name textarea {
+  overflow: hidden;
+  padding-bottom: 8px;
+  line-height: 1.4;
+}
+
+.W_Name input, .W_Name textarea {
+  background: none;
+  border: none;
+  font-family: 'Gilroy';
+  font-size: 18px;
+  color: #000;
+  outline: none;
+  resize: none;
+  width: auto;
+  text-indent: 20px;
+  line-height: 1.4;
+  padding: 0;
+  margin: 0;
+  padding-bottom: 8px;
+}
+
+.W_Name textarea {
+  overflow: hidden;
+  padding-bottom: 8px;
+  line-height: 1.4;
+}
+.W_Name input {
+  padding-bottom: 8px;
+  line-height: 1.4;
+  margin-left: -5px; 
+}
+.W_Name textarea {
+  overflow: hidden;
+  padding-bottom: 8px;
+  line-height: 1.4;
+  transform: translateY(3px); 
+}
+.W_Name textarea {
+  overflow: hidden;
+  padding-bottom: 8px;
+  line-height: 1.4;
+  transform: translateY(2px);
+  text-indent: 15px; 
+}
+.category-btn.hidden {
+  visibility: hidden;
+}
+.A_Load {
+  font-family: 'Gilroy-Semibold';
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 145%;
+  text-transform: uppercase;
+  color: #000;
+  text-align: center;
+  width: 542px;
+  margin-left: 0;
+}
+#file-name-display {
+  text-align: center;
+  width: 542px;
+  margin-left: 0;
+  position: relative;
+  z-index: 35;
+}
+.category-sticker {
+  position: absolute;
+  top: -50px;
+  right: 20px;
+  background: white;
+  padding: 8px 16px;
+  font-family: 'Gilroy-Medium';
+  font-size: 18px;
+  line-height: 123%;
+  text-transform: uppercase;
+  color: #000;
+  border: 1px solid #DADADA;
+  z-index: 40;
+  display: none;
+  pointer-events: none;
+  white-space: nowrap;
+}
+#cursor-area {
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.W_LoadProject {
+  display: block;
+  margin-left: 43px;
+  margin-top: 18px; 
+  position: relative;
+}
+
+</style>
+<div id="cursor-area">
+<%= form_with model: @project, local: true, id: 'project-form' do |form| %>
+  <p class='A_TextCreate2'> 
+    Загрузи проект <br>
+    в несколько кликов <br>и получи фидбек
+  </p>
+
+  <div class='O_CreateProject'>
+    <p class='A_Create'> 
+      создай
+    </p>
+    
+    <div class='W_LoadProject'>
+      <%= form.file_field :image, accept: 'image/*', id: 'project_image' %>
+      <%= image_tag "Q_Upper.png", class: "Q_Upper", id: "image-preview-upper" %>
+      
+      <div class="image-stack">
+        <img id="uploaded-image" class="uploaded-image" src="#" alt="Uploaded project">
+        <div id="category-sticker" class="category-sticker"></div>
+        <%= image_tag "Q_LoadIm.png", class: "Q_LoadIm", id: "image-preview-main" %>
+      </div>
+      
+      <p class='A_Load' id='file-name-display'> 
+        Загрузи проект
+      </p>
+    </div>
+
+    <div class='O_Name'>
+      <div class='W_Name'>
+        <p class='A_Name'>Название</p>
+        <%= form.text_field :title %>
+        <%= image_tag "Q_Pan.svg", class: "Q_Pan" %>
+        <%= image_tag "Q_Line.svg", class: "Q_Line" %>
+      </div>
+
+      <div class='W_Name'>
+        <p class='A_Name'>Описание</p>
+        <%= form.text_area :description, rows: 1 %>
+        <%= image_tag "Q_Pan.svg", class: "Q_Pan" %>
+        <%= image_tag "Q_Line.svg", class: "Q_Line" %>
+      </div>
+
+      <div class='W_Name'>
+        <p class='A_Name'>Запрос</p>
+        <%= form.text_area :feedback_request, rows: 1 %>
+        <%= image_tag "Q_Pan.svg", class: "Q_Pan" %>
+        <%= image_tag "Q_Line.svg", class: "Q_Line" %>
+      </div>
+
+      <div class='W_Button' id="category-buttons">
+        <%= form.radio_button :category, 'Веб дизайн', id: 'cat_web', class: 'category-radio' %>
+        <label for="cat_web" class='A_CreateButton category-btn' style="transform: rotate(0deg);">
+          Веб дизайн
+        </label>
+
+        <%= form.radio_button :category, 'Графический дизайн', id: 'cat_graphic', class: 'category-radio' %>
+        <label for="cat_graphic" class='A_CreateButton category-btn' style="transform: rotate(4deg); margin-top: 16px;">
+          Графический дизайн
+        </label>
+
+        <%= form.radio_button :category, 'Иллюстрация', id: 'cat_ill', class: 'category-radio' %>
+        <label for="cat_ill" class='A_CreateButton category-btn' style="transform: rotate(8deg); margin-top: 12px;">
+          Иллюстрация
+        </label>
+
+        <%= form.radio_button :category, 'Приложения', id: 'cat_app', class: 'category-radio' %>
+        <label for="cat_app" class='A_CreateButton category-btn' style="transform: rotate(20deg); margin-top: 24px;">
+          Приложения
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class='W_TextCreate'>
+    <p class='A_TextCreate3'> 
+      Заполни форму — дизайн увидят сотни коллег, чем больше контекста, тем полезнее комментарии
+    </p>
+    <p class='A_TextCreate4'> 
+      Reform
+    </p>
+    <%= image_tag "Q_Sent.svg", class: "Q_Sent", id: "submit-form" %>
+  </div>
+<% end %>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const fileInput = document.getElementById('project_image');
+    const mainImage = document.getElementById('image-preview-main');
+    const upperImage = document.getElementById('image-preview-upper');
+    const uploadedImage = document.getElementById('uploaded-image');
+    const fileNameDisplay = document.getElementById('file-name-display');
+    const categorySticker = document.getElementById('category-sticker');
+    const categoryButtons = document.querySelectorAll('.category-btn');
+    const categoryRadios = document.querySelectorAll('.category-radio');
+    
+    let selectedCategory = '';
+    
+    mainImage.addEventListener('click', function() {
+      fileInput.click();
+    });
+    
+    fileInput.addEventListener('change', function() {
+      if (this.files && this.files[0]) {
+        const reader = new FileReader();
+        
+        reader.onload = function(e) {
+          uploadedImage.src = e.target.result;
+          uploadedImage.style.display = 'block';
+          fileNameDisplay.textContent = this.files[0].name;
+          
+          if (selectedCategory) {
+            categorySticker.style.display = 'block';
+          }
+        }.bind(this);
+        
+        reader.readAsDataURL(this.files[0]);
+      }
+    });
+    
+    categoryRadios.forEach((radio, index) => {
+      radio.addEventListener('change', function() {
+        if (this.checked) {
+          selectedCategory = this.value;
+          
+          categorySticker.textContent = this.value;
+          categorySticker.style.display = 'block';
+          
+          const transforms = {
+            'cat_web': 'rotate(0deg)',
+            'cat_graphic': 'rotate(4deg)',
+            'cat_ill': 'rotate(8deg)',
+            'cat_app': 'rotate(20deg)'
+          };
+          
+          if (transforms[this.id]) {
+            categorySticker.style.transform = transforms[this.id];
+          }
+          
+          categoryButtons[index].style.visibility = 'hidden';
+        }
+      });
+    });
+    
+    document.getElementById('submit-form').addEventListener('click', function() {
+      document.getElementById('project-form').submit();
+    });
+  });
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  const loadImage = document.getElementById('image-preview-main'); // Q_LoadIm
+  const upperImage = document.getElementById('image-preview-upper'); // Q_Upper
+  const cursor = document.createElement('img');
+  
+  cursor.src = '<%= asset_path('handd.png') %>';
+  cursor.style.position = 'fixed';
+  cursor.style.width = '276px';  
+  cursor.style.height = '468px'; 
+  cursor.style.pointerEvents = 'none';
+  cursor.style.zIndex = '9999';
+  cursor.style.display = 'none';
+  cursor.style.objectFit = 'contain'; 
+  
+  document.body.appendChild(cursor);
+  
+  function showCursor(e) {
+    cursor.style.display = 'block';
+    loadImage.style.cursor = 'none';      // убираем курсор на Q_LoadIm
+    upperImage.style.cursor = 'none';      // убираем курсор на Q_Upper
+  }
+  
+  function moveCursor(e) {
+    cursor.style.left = (e.clientX - 138) + 'px'; 
+    cursor.style.top = (e.clientY - 234) + 'px';  
+  }
+  
+  function hideCursor() {
+    cursor.style.display = 'none';
+    loadImage.style.cursor = '';           // возвращаем стандартный курсор
+    upperImage.style.cursor = '';           // возвращаем стандартный курсор
+  }
+  
+  loadImage.addEventListener('mouseenter', showCursor);
+  loadImage.addEventListener('mousemove', moveCursor);
+  loadImage.addEventListener('mouseleave', hideCursor);
+  
+  upperImage.addEventListener('mouseenter', showCursor);
+  upperImage.addEventListener('mousemove', moveCursor);
+  upperImage.addEventListener('mouseleave', hideCursor);
+});
+</script>
