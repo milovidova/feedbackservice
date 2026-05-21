@@ -344,16 +344,16 @@
       </button>
       
 
-      <nav class="main-nav">
-        <%= link_to "Проекты", root_path, 
-            class: "nav-link #{current_page?(root_path) ? 'active' : ''}" %>
-        <%= link_to "О нас", pages_about_path, 
-            class: "nav-link #{current_page?(pages_about_path) ? 'active' : ''}" %>
-        <%= link_to "Статьи", pages_profile_path, 
-            class: "nav-link #{current_page?(pages_profile_path) ? 'active' : ''}" %>
-        <%= link_to "Профиль", new_project_path, 
-            class: "nav-link #{current_page?(new_project_path) ? 'active' : ''}" %>
-      </nav>
+  <nav class="main-nav">
+  <%= link_to "Проекты", root_path, 
+      class: "nav-link #{current_page?(root_path) ? 'active' : ''}" %>
+  <%= link_to "О нас", pages_about_path, 
+      class: "nav-link #{current_page?(pages_about_path) ? 'active' : ''}" %>
+  <%= link_to "Статьи", pages_profile_path, 
+      class: "nav-link #{current_page?(pages_profile_path) ? 'active' : ''}" %>
+ <%= link_to "Профиль", new_project_path, 
+      class: "nav-link #{current_page?(new_project_path) ? 'active' : ''}" %>
+</nav>
       
      
       <%= image_tag "vectorsearch.svg", class: "search", alt: "Поиск" %>
@@ -366,7 +366,7 @@
         <%= link_to "О нас", pages_about_path, 
             class: "nav-link #{current_page?(pages_about_path) ? 'active' : ''}" %>
         <%= link_to "Профиль", pages_profile_path, 
-            class: "nav-link #{current_page?(pages_profile_path) ? 'active' : ''}" %>
+     class: "nav-link #{current_page?('/pages/articles') ? 'active' : ''}" %>
         <%= link_to "Создать проект", new_project_path, 
             class: "nav-link #{current_page?(new_project_path) ? 'active' : ''}" %>
       </nav>

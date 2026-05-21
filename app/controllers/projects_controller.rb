@@ -1,8 +1,9 @@
 class ProjectsController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :grid, :show]
 
   def index
     @projects = Project.all
-    @view_mode = :gallery  
+    @view_mode = :gallery
 
     respond_to do |format|
       format.html
@@ -13,7 +14,7 @@ class ProjectsController < ApplicationController
   def grid
     @projects = Project.includes(:user).all
     @view_mode = :grid
-    render :index 
+    render :index
   end
 
   def show
@@ -26,18 +27,23 @@ class ProjectsController < ApplicationController
   end
 
   def new
-    @project = Project.new
+  
+    @project  = current_user.projects.new
+    @projects = current_user.projects
+
+     @my_feedbacks = current_user.feedbacks.includes(:project)
   end
 
   def create
-    @project = Project.new(project_params)
-    @project.user = User.first
+    @project = current_user.projects.new(project_params)
 
     respond_to do |format|
       if @project.save
         format.html { redirect_to project_path(@project), notice: "Проект создан!" }
         format.json { render :show, status: :created, location: @project }
       else
+ 
+        @projects = current_user.projects
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @project.errors, status: :unprocessable_entity }
       end
@@ -47,7 +53,7 @@ class ProjectsController < ApplicationController
   def destroy
     @project = Project.find(params[:id])
     @project.destroy
-    redirect_to projects_path, notice: 'Проект успешно удален'
+    redirect_to projects_path, notice: "Проект успешно удален"
   end
 
   def edit
@@ -56,9 +62,9 @@ class ProjectsController < ApplicationController
 
   def update
     @project = Project.find(params[:id])
-    
+
     if @project.update(project_params)
-      redirect_to project_path(@project), notice: 'Проект обновлен!'
+      redirect_to project_path(@project), notice: "Проект обновлен!"
     else
       render :edit
     end

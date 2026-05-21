@@ -63,3 +63,9 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+gem "devise"
+
+gem "jwt"
+gem "rack-cors"
+gem "openssl"

@@ -6,6 +6,9 @@ class PagesController < ApplicationController
   end
   
   def articles
+    @user = current_user
+    @projects = current_user.projects
+    @feedbacks = current_user.feedbacks
   end
 
   def article1

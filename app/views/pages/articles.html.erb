@@ -243,6 +243,7 @@ margin-top: 10px
         <p class='A_Info'>Проекты: 7</p>
         <p class='A_Info'>Фидбеки: 10</p>
         <p class='A_Info'>Мои фидбеки: 11</p>
+        
       </div>
 
        <p class='A_ProfileName'>Max <br> Designer</p>
@@ -265,31 +266,35 @@ margin-top: 10px
   <%= image_tag "Q_Haos.png", class: "Q_Haos" %>
 
   
-  <div style="position: relative; width: 100%; margin-top: -800px; margin-bottom: 100px; min-height: 500px;">
-    
-    <% 
-      all_projects = Project.all.to_a
-      random_projects = all_projects.shuffle.first(7)
+    <div style="position: relative; width: 100%; margin-top: -800px; margin-bottom: 100px; min-height: 500px;">
+
+    <%
+     
+      user_projects = @projects.to_a
+
+  
+      random_projects = user_projects.shuffle.first(7)
+
       random_positions = []
       random_projects.each_with_index do |project, index|
-        random_left = rand(150..1350)
-        random_top = rand(-100..400)
+        random_left   = rand(150..1350)
+        random_top    = rand(-100..400)
         random_rotate = rand(-25..25)
-        random_width = rand(180..280)
-        
+        random_width  = rand(180..280)
+
         random_positions << {
-          left: random_left,
-          top: random_top,
+          left:   random_left,
+          top:    random_top,
           rotate: random_rotate,
-          width: random_width
+          width:  random_width
         }
       end
     %>
-    
+
     <% random_projects.each_with_index do |project, index| %>
       <% if project.image.present? %>
         <% pos = random_positions[index] %>
-        
+
         <div style="position: absolute; 
                     left: <%= pos[:left] %>px; 
                     top: <%= pos[:top] %>px; 
@@ -300,8 +305,8 @@ margin-top: 10px
                     transition: transform 0.3s ease;"
              onmouseover="this.style.transform='rotate(<%= pos[:rotate] %>deg) scale(1.1)'; this.style.zIndex='2';"
              onmouseout="this.style.transform='rotate(<%= pos[:rotate] %>deg) scale(1)'; this.style.zIndex='1';">
-          
-          <%= image_tag project.image.url, 
+
+          <%= image_tag project.image.url,
                 style: "width: 100%; 
                         height: auto; 
                         display: block;" %>
@@ -309,7 +314,6 @@ margin-top: 10px
       <% end %>
     <% end %>
   </div>
-</div>
 
 
 <div class="feedback-content" style="display: none;">
@@ -408,7 +412,16 @@ margin-top: 10px
 
 <div class="settings-content" style="display: none;">
   <div style="position: relative; width: 100%; margin-top: 50px; padding: 20px;">
-    <p style="font-family: 'Gilroy'; font-size: 24px; color: #000;">Здесь будут настройки</p>
+    <p style="font-family: 'Gilroy'; font-size: 24px; color: #000; margin-bottom: 20px;">
+      Настройки
+    </p>
+
+    <% if user_signed_in? %>
+      <%= button_to 'Выйти из аккаунта',
+                    destroy_user_session_path,
+                    method: :delete,
+                    style: "font-family: 'Gilroy'; font-size: 18px; padding: 10px 20px; border-radius: 20px; border: 1px solid #000; background: #fff; cursor: pointer;" %>
+    <% end %>
   </div>
 </div>
 

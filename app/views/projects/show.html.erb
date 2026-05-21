@@ -443,41 +443,46 @@ div[style*="pointer-events: auto"] img {
 
 <p class='A_FidText'>Фидбеки</p>
 
-<%
- 
-  all_feedbacks_from_db = Feedback.all.to_a
-  random_feedback_1 = all_feedbacks_from_db.sample
-  random_feedback_2 = all_feedbacks_from_db.sample
-  
-  feedback_text_1 = random_feedback_1 ? random_feedback_1.content : "Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus. Nullam dictum felis eu pede mollis pretium. Integer tincidunt."
-  feedback_text_2 = random_feedback_2 ? random_feedback_2.content : "Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus. Nullam dictum felis eu pede mollis pretium. Integer tincidunt."
-%>
+<% if @project.feedbacks.any? %>
+  <% @project.feedbacks.includes(:user).each_with_index do |feedback, index| %>
 
-<div class="W_Fidback">
- <div class="M_FidName">
-<p class='A_FidName'>Максим</p>
-<p class='A_FidCat'>Новичок</p>
- </div>
-  <div class="M_FidText">
-  <%= image_tag "Q_Stars.svg", class: "Q_Stars" %>
-<p class='A_Fidback'><%= feedback_text_1 %></p>
- </div>
- </div>
- <div class="Q_GrayLine"> </div>
+    <% if index == 0 %>
+      <!-- Первый фидбек в "старой" верстке -->
+      <div class="W_Fidback">
+        <div class="M_FidName">
+          <p class='A_FidName'><%= feedback.user&.username || 'Аноним' %></p>
+          <p class='A_FidCat'>Новичок</p>
+        </div>
+        <div class="M_FidText">
+          <%= image_tag "Q_Stars.svg", class: "Q_Stars" %>
+          <p class='A_Fidback'><%= feedback.content %></p>
+        </div>
+      </div>
+      <div class="Q_GrayLine"></div>
 
-<div class="W_Fidback2">
- <div class="W_Fidback">
- <div class="M_FidName">
-<p class='A_FidName'>Денис</p>
-<p class='A_FidCat'>Новичок</p>
- </div>
-  <div class="M_FidText">
-  <%= image_tag "Q_Stars.svg", class: "Q_Stars" %>
-<p class='A_Fidback'><%= feedback_text_2 %></p>
- </div>
- </div>
- <div class="Q_GrayLine"> </div>
-</div>
+    <% else %>
+      <!-- Остальные фидбеки в "обёртке" W_Fidback2 -->
+      <div class="W_Fidback2">
+        <div class="W_Fidback">
+          <div class="M_FidName">
+            <p class='A_FidName'><%= feedback.user&.username || 'Аноним' %></p>
+            <p class='A_FidCat'>Новичок</p>
+          </div>
+          <div class="M_FidText">
+            <%= image_tag "Q_Stars.svg", class: "Q_Stars" %>
+            <p class='A_Fidback'><%= feedback.content %></p>
+          </div>
+        </div>
+        <div class="Q_GrayLine"></div>
+      </div>
+    <% end %>
+
+  <% end %>
+<% else %>
+  <p style="margin-left: 720px; font-family: 'Gilroy'; font-size: 18px; color: #777;">
+    На этот проект пока нет фидбеков. Будь первым!
+  </p>
+<% end %>
 
 <div id="new-feedbacks-container"></div>
 
@@ -576,94 +581,89 @@ document.addEventListener('DOMContentLoaded', function() {
   const projectImage = document.getElementById('project-main-image');
   const feedbackFormTemplate = document.getElementById('feedback-form-template');
   const feedbackDisplayTemplate = document.getElementById('feedback-display-template');
-  
 
   let activeFeedback = null;
   let clickPosition = { x: 0, y: 0 };
-  
 
   if (projectImageContainer && customCursor && projectImage) {
     projectImageContainer.addEventListener('mousemove', function(e) {
       const rect = this.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
-      
+
       customCursor.style.left = (x - 26) + 'px';
       customCursor.style.top = (y - 26) + 'px';
       customCursor.style.opacity = '1';
     });
-    
+
     projectImageContainer.addEventListener('mouseleave', function() {
       customCursor.style.opacity = '0';
     });
-    
-    
+
     projectImageContainer.addEventListener('click', function(e) {
       e.preventDefault();
       e.stopPropagation();
-      
+
       const rect = this.getBoundingClientRect();
       clickPosition = {
         x: e.clientX - rect.left,
         y: e.clientY - rect.top
       };
-      
+
       if (activeFeedback) {
         hideActiveFeedback();
       }
-      
+
       showFeedbackForm();
     });
   }
-  
 
   function showFeedbackForm() {
     if (!projectImageContainer || !feedbackFormTemplate) return;
-    
+
     const oldForm = document.getElementById('feedback-form-overlay');
     if (oldForm) {
       oldForm.remove();
     }
-    
+
     const formOverlay = document.createElement('div');
     formOverlay.id = 'feedback-form-overlay';
     formOverlay.style.position = 'absolute';
     formOverlay.style.left = (clickPosition.x - 300) + 'px';
-    formOverlay.style.top = (clickPosition.y - 32) + 'px'; // -32 чтобы выровнять по центру высоты
+    formOverlay.style.top = (clickPosition.y - 32) + 'px';
     formOverlay.style.zIndex = '100';
     formOverlay.style.display = 'block';
-    
+
     const formContent = feedbackFormTemplate.cloneNode(true);
     formContent.style.display = 'block';
     formContent.id = 'active-feedback-form';
-    
+
     formOverlay.appendChild(formContent);
     projectImageContainer.appendChild(formOverlay);
-    
+
     activeFeedback = formOverlay;
-    
+
     setTimeout(() => {
       const input = formOverlay.querySelector('input[name="feedback[content]"]');
       if (input) input.focus();
     }, 100);
-    
+
     const form = formOverlay.querySelector('#inline-feedback-form');
     if (form) {
       form.addEventListener('submit', handleFeedbackSubmit);
     }
-    
+
     document.addEventListener('click', closeFormOnClickOutside);
   }
-  
-  
+
   function showExistingFeedback(feedbackData) {
     if (!projectImageContainer || !feedbackDisplayTemplate) return;
-    
+
     const oldFeedback = document.getElementById('feedback-form-overlay');
     if (oldFeedback) {
       oldFeedback.remove();
     }
-    
+
     const feedbackOverlay = document.createElement('div');
     feedbackOverlay.id = 'feedback-form-overlay';
     feedbackOverlay.style.position = 'absolute';
@@ -671,38 +671,36 @@ document.addEventListener('DOMContentLoaded', function() {
     feedbackOverlay.style.top = (clickPosition.y - 32) + 'px';
     feedbackOverlay.style.zIndex = '100';
     feedbackOverlay.style.display = 'block';
-    
+
     const feedbackContent = feedbackDisplayTemplate.cloneNode(true);
     feedbackContent.style.display = 'block';
-    
+
     const feedbackText = feedbackContent.querySelector('.feedback-content');
     if (feedbackText) {
       feedbackText.textContent = feedbackData.content;
     }
-    
+
     feedbackOverlay.appendChild(feedbackContent);
     projectImageContainer.appendChild(feedbackOverlay);
-    
+
     activeFeedback = feedbackOverlay;
     document.addEventListener('click', closeFormOnClickOutside);
   }
-  
 
   function handleFeedbackSubmit(e) {
     e.preventDefault();
-    
+
     const form = e.target;
     const formData = new FormData(form);
     const projectId = '<%= @project.id %>';
-    
+
     if (!formData.get('feedback[category]')) {
       formData.set('feedback[category]', 'Композиция');
     }
     if (!formData.get('feedback[is_helpful]')) {
       formData.set('feedback[is_helpful]', 'false');
     }
-    
-  
+
     fetch(`/projects/${projectId}/feedbacks`, {
       method: 'POST',
       body: formData,
@@ -729,15 +727,13 @@ document.addEventListener('DOMContentLoaded', function() {
       alert('Ошибка при отправке фидбека');
     });
   }
-  
- 
+
   function closeFormOnClickOutside(e) {
-    if (activeFeedback && !activeFeedback.contains(e.target) && 
+    if (activeFeedback && !activeFeedback.contains(e.target) &&
         !projectImageContainer.contains(e.target)) {
       hideActiveFeedback();
     }
   }
-  
 
   function hideActiveFeedback() {
     if (activeFeedback) {
@@ -747,72 +743,48 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
-  
-  
   const submitBtn = document.getElementById('submit-feedback-btn');
   const feedbackInput = document.getElementById('new-feedback-input');
   const newFeedbacksContainer = document.getElementById('new-feedbacks-container');
   const projectId = '<%= @project.id %>';
-  
- 
+
   function escapeHtml(text) {
     const div = document.createElement('div');
     div.textContent = text;
     return div.innerHTML;
   }
-  
-  
+
   function addNewFeedbackToDOM(feedbackData) {
-   
     const newFeedbackDiv = document.createElement('div');
     newFeedbackDiv.className = 'W_Fidback';
     newFeedbackDiv.style.marginTop = '20px';
-    
+
     newFeedbackDiv.innerHTML = `
       <div class="M_FidName">
         <p class='A_FidName'>${escapeHtml(feedbackData.user_name || 'Вы')}</p>
         <p class='A_FidCat'>${escapeHtml(feedbackData.user_level || 'Новичок')}</p>
       </div>
       <div class="M_FidText">
-        <div style="margin-left: 328px;">
-          <svg width="100" height="20" viewBox="0 0 100 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M10 0L12.245 6.90983H19.5106L13.6328 11.1803L15.8778 18.0902L10 13.8197L4.12215 18.0902L6.36715 11.1803L0.489435 6.90983H7.75499L10 0Z" fill="#FFD700"/>
-            <path d="M30 0L32.245 6.90983H39.5106L33.6328 11.1803L35.8778 18.0902L30 13.8197L24.1222 18.0902L26.3672 11.1803L20.4894 6.90983H27.755L30 0Z" fill="#FFD700"/>
-            <path d="M50 0L52.245 6.90983H59.5106L53.6328 11.1803L55.8778 18.0902L50 13.8197L44.1222 18.0902L46.3672 11.1803L40.4894 6.90983H47.755L50 0Z" fill="#FFD700"/>
-            <path d="M70 0L72.245 6.90983H79.5106L73.6328 11.1803L75.8778 18.0902L70 13.8197L64.1222 18.0902L66.3672 11.1803L60.4894 6.90983H67.755L70 0Z" fill="#FFD700"/>
-            <path d="M90 0L92.245 6.90983H99.5106L93.6328 11.1803L95.8778 18.0902L90 13.8197L84.1222 18.0902L86.3672 11.1803L80.4894 6.90983H87.755L90 0Z" fill="#FFD700"/>
-          </svg>
-        </div>
         <p class='A_Fidback'>${escapeHtml(feedbackData.content)}</p>
       </div>
     `;
-    
-    
-    const grayLine = document.createElement('div');
-    grayLine.className = 'Q_GrayLine';
-    
-  
-    newFeedbacksContainer.appendChild(grayLine);
+
     newFeedbacksContainer.appendChild(newFeedbackDiv);
-    
-   
     newFeedbackDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
-  
- 
+
   async function submitNewFeedback() {
     const content = feedbackInput.value.trim();
-    
+
     if (!content) {
       alert('Введите текст фидбека');
       return;
     }
-    
-   
+
     submitBtn.disabled = true;
     const originalBtnContent = submitBtn.innerHTML;
     submitBtn.innerHTML = '⏳';
-    
+
     try {
       const response = await fetch(`/projects/${projectId}/feedbacks`, {
         method: 'POST',
@@ -829,27 +801,18 @@ document.addEventListener('DOMContentLoaded', function() {
           }
         })
       });
-      
+
       const data = await response.json();
-      
-      if (response.ok && data.success) {
-        
-        addNewFeedbackToDOM({
-          content: content,
-          user_name: data.feedback.user.username || 'Вы',
-          user_level: 'Новичок'
-        });
-        
-     
-        feedbackInput.value = '';
-        
-       
-        const successMsg = document.createElement('div');
-        successMsg.textContent = '✓ Фидбек добавлен!';
-        successMsg.style.cssText = 'position: fixed; bottom: 20px; right: 20px; background: #4CAF50; color: white; padding: 12px 24px; border-radius: 8px; z-index: 1000; font-family: Gilroy; font-size: 16px; box-shadow: 0 2px 10px rgba(0,0,0,0.2);';
-        document.body.appendChild(successMsg);
-        setTimeout(() => successMsg.remove(), 2000);
-      } else {
+
+     if (response.ok && data.success) {
+  addNewFeedbackToDOM({
+    content: content,
+    user_name: data.feedback.user.username || 'Вы',
+    user_level: 'Новичок'
+  });
+
+  feedbackInput.value = '';
+} else {
         throw new Error(data.errors || 'Ошибка при отправке');
       }
     } catch (error) {
@@ -864,12 +827,11 @@ document.addEventListener('DOMContentLoaded', function() {
       submitBtn.innerHTML = originalBtnContent;
     }
   }
-  
 
   if (submitBtn) {
     submitBtn.addEventListener('click', submitNewFeedback);
   }
-  
+
   if (feedbackInput) {
     feedbackInput.addEventListener('keypress', function(e) {
       if (e.key === 'Enter') {
@@ -879,6 +841,4 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 });
-
-
 </script>
